@@ -1,0 +1,206 @@
+---
+title: "Getting Started"
+---
+
+```{r setup1, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, dev = "png",
+                      fig.width = 5, fig.height = 5)
+```
+
+## Downloading and installing 
+
+R is a free to use open source software that can be used for data visualisation and statistical analysis. RStudio is an integrated development environment - it's a more user friendly interface for R. 
+
+We will start by downloading and installing these two pieces of software. 
+
+First we need to install R:
+
+1. Go to [https://www.r-project.org](https://www.r-project.org)
+2. Under the heading 'Download' , click on 'CRAN'
+3.  Click on the web-address for one of the CRAN Mirrors (The choice is not critical, but you are recommended
+to choose a mirror from a nearby country)
+4. Inside the box `Download and install R', click on Download R for your platform and follow the installation instructions
+
+Next we will install RStudio:
+
+1. Go to [https://posit.co/downloads/](https://posit.co/downloads/)
+2. Click on 'Download' under the column which says RStudio Desktop Free
+3. Follow the installation instructions.
+
+Once R and RStudio have been installed on your computer, open Rstudio. You will see that the RStudio interface is made up of four panels :
+
+1. Source
+2. Console
+3. Environment / History
+4. Files / Plots / Packages / Help
+
+![](rstudio_layout.png)
+
+## The RStudio Console
+The Console is where all your code will be evaluated. 
+
+You can start typing immediately into the Console. For example, try typing some basic arithmetic and pressing enter, the output should look like this:
+
+```{r basic}
+2 + 2
+```
+
+R can be used as a basic calculator, and most operations are straightforward:
+
+Add :
+```{r add}
+2 + 2
+```
+Subtract:
+```{r subtract}
+10 - 6
+```
+Multiply :
+```{r multiply}
+12 * 2
+```
+Divide : 
+```{r divide}
+50 / 10
+```
+Square : 
+```{r square}
+4 ^ 2
+```
+
+The problem with typing directly into the R console is that you can't edit as you type.
+
+Instead, we want to be able to edit our code and save our progress. 
+
+We do this using an R script.
+
+## The R Script
+The Source panel is where we will edit and write our code. 
+
+To open a new R script go to 'File' then 'New  file' then 'R script'. Alternatively click on the icon ![](new_file.png) then select 'R script'.
+
+To save the R script, go to 'File' then 'Save', or click on the save icon ![](save.png).
+
+Type `2+2` into your R script. Then, make sure the mouse pointer (cursor) is on the line you want to evaluate (it can be at the beginning, the middle, the end - it doesn't matter!) . 
+
+To 'run' your line of code, click on the ![](run_line.png) symbol or press CTRL and Enter simultaneously (command and Enter on a Mac).
+
+You will now see that your line of code has been evaluated in the R console. This is called 'running' a line of code. 
+
+The *working directory* is where we will save any plots we make, and store data we will be using. Once setup, the directory is the default place that our plots will be saved to. It will also be the default place that R searches for any data we want to use.
+
+The working directory can be set up in two ways. We can select the folder we want to set as our working directory as follows:
+
+'Session -> Set Working Directory -> Choose Directory...'
+
+Then press 'Open' when you find your chosen folder.
+
+Or, we can use the command `setwd()` which stands for "set working directory". We use the function `setwd()` by typing the file path, for example:
+
+`setwd("C:/Users/Amanda/Documents")` 
+
+We will see why the working directory becomes important when we start to read in external data files and save plots. To check what your current working directory is type `getwd()` into the console.
+
+
+## Assigning values 
+
+We have used the R console to perform some basic calculations such as addition and subtraction. In some cases, you will need to perform the same calculation over and over again. This is where assigning values becomes useful.
+
+Some animals carry and transmit diseases between the environment and humans. In this case let’s say we want to show the demographic characteristics of a population of wild rats. The data is given to us in kilograms but want it in grams.
+
+For each weight, 0.23, 0.164, 0.268, 0.188, 0.299 in kilograms, we can multiple by 1000 to get the corresponding weight in grams. For the first two weights 0.23 and 0.164 we do this as follows:
+
+
+```{r assignment1}
+0.23 * 1000
+0.164 * 1000
+```
+
+This is quite an inefficient way to do this calculation! We would have to type each weight separately. Let’s improve this calculation by assigning the value 1000 to a letter,
+
+```{r assignment2}
+a <- 1000
+```
+If you run the line above, the R console does not print anything. This is because you have 'assigned' `a` the value 1000 using `<-`, so to see what `a` is, you need type it into the R console.
+
+```{r assignment3}
+a <- 1000
+a
+```
+
+If you now look at the Environment panel, you will see that we have loaded `a` into our global environment. This means that R will remember what `a` is. 
+
+We assigned `a` a value to make our calculation more efficient. Now, we can multiply each weight by `a` :
+
+```{r assignment4}
+a <- 1000
+0.23 * a
+0.164 * a
+0.268 * a
+0.188 * a
+0.299 * a
+```
+
+But, we can improve the efficiency of our calculation even further by placing our weights into a vector. A vector is a basic data structure used to store a sequence of elements of the same type. In our example, we are storing numeric values in a vector named `weights`.
+
+
+```{r assignment5}
+weights <- c(0.23, 0.164, 0.268, 0.188, 0.299)
+weights
+```
+
+The `c` means concatenate. We are concatenating all of our weights into one vector.
+
+Now we can perform our calculation in fewer lines, and we can easily change either the weight vector, or if we were performing a different conversion, we can change `a`.
+
+```{r assignment6}
+a <- 1000
+weights <- c(0.23, 0.164, 0.268, 0.188, 0.299)
+weights * a
+```
+
+
+## Using functions 
+In the previous sections, we performed fairly basic calculations but R can be used to perform advanced statistical analysis. R has many built in functions that can be used to analyse data, create plots and much more. 
+
+A functions requires one or more inputs, or 'arguments', and gives one or more outputs, or 'values'. 
+
+Let's look at an example. Say we want to find the maximum and minimum weights in our vector. Then we can use the functions `min` and `max` with the weight vector as our argument (input):
+```{r functions}
+weights <- c(0.23, 0.164, 0.268, 0.188, 0.299)
+max(weights)
+min(weights)
+```
+
+If you are unsure of what an R function is doing, then you can type `?` in front of the function name into the R console, which will take you to the help page of that function.
+
+The help pages describe the usage of the function and the arguments which need to be passed to the function. For example, try typing into the console`?max`.
+
+There is a search bar which can be used to look for R functions in the Help tab of the Files / Plots / Packages / Help panel. However, if you do not know the name of the function you are looking for it can be easier to instead use a search engine.
+
+::: {.callout-note icon="false}
+
+## Exercise
+
+Using the vector of weights in the assigning values section (0.23, 0.164, 0.268, 0.188, 0.299), find the mean of the and standard deviation of the weights (in kg) to two decimal places.
+:::
+
+::: {.callout-note collapse="true" icon="false}
+## Solution
+
+We use the R functions `mean` and `sd` to find the mean and standard deviation respectively.
+
+We can find the mean and standard deviation to 2 decimal places using the function `round`. Note that `round` has two inputs. The first is the vector of values and the second is the number of decimal places.
+
+In the code below, note how we can concatenate already assigned objects into a new vector `c(mean_val,sd_val)`.
+
+```{r functions_task, echo = TRUE}
+weights <- c(0.23, 0.164, 0.268, 0.188, 0.299)
+mean_val <- mean(weights)
+sd_val <- sd(weights)
+round(c(mean_val, sd_val), 2)
+```
+
+:::
+
+

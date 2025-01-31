@@ -1,0 +1,106 @@
+---
+title: "SIR model"
+---
+
+
+We will extend the SI model to also include the possibility of recovering from infection. We have the 'S' and 'I' compartment as before. In addition, individuals can recover from infection and move to the recovered compartment, 'R'. 
+
+We extend our flow diagram to include our extra compartment 'R' and a flow between 'I' and 'R', representing infected individuals recovering from infection.
+
+![](SIR_words.png)
+
+Again, we can write down our assumptions in words. In this model, we have one additional equation representing the rate of change of the recovered population. The recovered individuals enter the recovered population at the same rate as individuals leaving the infected population. Therefore our recoveries will have a negative sign to indicate them leaving the infected population.
+$$
+\begin{aligned}
+\mbox{susceptible population rate of change} & = - \mbox{infections} \\
+\mbox{infected population rate of change} &= + \mbox{infections} - \mbox{recoveries} \\
+\mbox{recovered population rate of change} &= + \mbox{recoveries}
+\end{aligned}
+$$
+
+We have two different processes : infection and recovery. 
+
+We introduce a new parameter, the recovery rate $\gamma$. The recovery rate is the inverse of the average infectious period. If the average infectious period is 7 days, then the daily recovery rate is $1/7$. 
+
+The individuals recovering at each time step is the product the recovery rate, and  the proportion of individuals in the $I$ compartment at that time : $\gamma I$.
+
+For infections, we have $\beta S I$ leaving $dS/dt$ and entering $dI/dt$. 
+
+For recoveries, we have $\gamma I$ leaving $dI/dt$ and entering $dR/dt$. 
+
+$$
+\begin{aligned}
+\frac{dS}{dt} & = - \beta S I/N  \\
+\frac{dI}{dt} &= \beta S I/N - \gamma I \\
+\frac{dR}{dt} &=\gamma I \\
+\end{aligned}
+$$
+
+
+What do you think the solution to this system of ODEs will look like?
+
+```{r SIR, echo = FALSE}
+library(deSolve)
+SIR_model <- function(time, state_var, pars){
+  # Extract state variables
+  S <- state_var["S"]
+  I <- state_var["I"]
+  R <- state_var["R"]
+  N <- S + I + R
+  # Extract model parameters
+  beta <- pars["beta"]
+  gamma <- pars["gamma"]
+  # The differential equations
+  dS <- - beta * S * I / N
+  dI <- beta * S * I / N - gamma * I
+  dR <- gamma * I
+  # Return the solved equations as a list
+  sol <- list(c(dS, dI, dR))
+  return(sol)
+}
+
+# What are our parameter values?
+pars <- c(beta = 0.6, gamma = 0.14)
+
+# Define time to solve equations
+times <- seq(from = 0, to = 50, by = 1)
+
+# What are the initial values (or conditions) of the state variables?
+state_var <- c( S = 99, I = 1, R = 0)
+
+# Solve the Susceptible Infected equations over the vector of times , time
+# with initial conditions
+solution <- as.data.frame(ode(y = state_var, times = times, func = SIR_model,
+                              parms = pars, method = rk4))
+
+plot(solution$time, solution$S, col = 'darkblue', lwd = 2, type = "l",
+     ylim = c(0, 100), ylab = "Number", xlab = "Time")
+lines(solution$time, solution$I, col = 'darkred', lwd = 2, lty = 2)
+lines(solution$time, solution$R, col = 'darkgreen', lwd = 2, lty = 3)
+legend(30, 60, c("Susceptible", "Infected", "Recovered"),
+       col = c("darkblue", "darkred", "darkgreen"),
+       lwd = 2, lty = c(1, 2, 3), bty = "n")
+```
+
+The susceptible population slowly decreases as the number of infected individuals increases. As individuals can recover, there is a peak in the number of infected individuals – this is the epidemic peak, followed by an increase in the number of recovered individuals.
+
+In the next section, we will learn how to implement these models in R.
+
+
+::: {.callout-note icon="false}
+
+## Exercise
+
+1. How many compartments are in the SIR model?
+2. How many parameters are in the SIR model (not including total population size $N$)? 
+
+:::
+
+::: {.callout-note collapse="true" icon="false}
+## Solution
+1. There are three compartments : susceptible, infected and recovered.
+2. There are two parameters, the transmission rate $\beta$ and the recovery rate $\gamma$.
+
+:::
+
+

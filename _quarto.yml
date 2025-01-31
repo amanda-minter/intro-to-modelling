@@ -3,12 +3,51 @@ project:
   output-dir: docs
 
 website:
-  title: "intro-to-modelling"
+  title: "The Maths of Infectious Disease Modelling"  
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code
+            href:  https://github.com/amanda-minter/intro-to-modelling
+          - text: Report an Error
+            href:  https://github.com/amanda-minter/intro-to-modelling/issues/new?template=Blank+issue
+  sidebar: 
+    style: "docked"
+    search: true
+    contents:
+      - index.qmd
+      - section: "Calculus for Modelling"
+        contents:
+          - calculus/differentiation.qmd
+          - calculus/integration.qmd
+          - calculus/ODE.qmd
+          - calculus/numerical_integration.qmd
+          - calculus/numerical_integration_2.qmd
+          - calculus/systems.qmd
+      - section: "Introduction to Infectious Disease Modelling"
+        contents:
+          - modelling/introduction.qmd
+          - modelling/SI.qmd
+          - modelling/SIR.qmd
+          - modelling/R.qmd
+          - modelling/freq_dens_dependence.qmd
+          - modelling/prop_numbers.qmd
+          - modelling/R0.qmd
+          - modelling/NGM.qmd
+          - modelling/SIR_demography.qmd
+          - modelling/SIRS.qmd
+          - modelling/sensitivity.qmd
+          - modelling/events.qmd
+          - modelling/stochastic_discrete_time.qmd
+      - section: "R essentials"
+        contents:
+          - R_notes/getting_started.qmd
+          - R_notes/extracting_information.qmd
+          - R_notes/packages.qmd
+          - R_notes/plots.qmd
+          - R_notes/working_code.qmd
+          - R_notes/functions.qmd
 
 format:
   html:

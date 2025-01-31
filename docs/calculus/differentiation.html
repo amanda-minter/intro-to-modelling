@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Maths of Infectious Disease Modelling - Differentiation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">The Maths of Infectious Disease Modelling</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/amanda-minter/intro-to-modelling">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/amanda-minter/intro-to-modelling/issues/new?template=Blank+issue">
+            Report an Error
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../calculus/differentiation.html">Calculus for Modelling</a></li><li class="breadcrumb-item"><a href="../calculus/differentiation.html">Differentiation</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Calculus for Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/differentiation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Differentiation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/ODE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ordinary differential equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/numerical_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/numerical_integration_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical integration : Using deSolve</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Systems of ODE’s</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Introduction to Infectious Disease Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/SI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Susceptible - Infected model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/SIR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SIR model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/freq_dens_dependence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Frequency or density dependence</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/prop_numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modelling proportions or numbers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/R0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic reproduction number</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/NGM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Next Generation Matrix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/SIR_demography.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Including demography</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/SIRS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Test your understanding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/sensitivity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sensitivity analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/events.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using events : vaccination</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/stochastic_discrete_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BONUS : Stochastic models</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">R essentials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/getting_started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/extracting_information.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extracting information</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R packages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/working_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working with code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working with code</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#principle-of-differentiation" id="toc-principle-of-differentiation" class="nav-link" data-scroll-target="#principle-of-differentiation">Principle of differentiation</a></li>
+  <li><a href="#gradient-at-a-point" id="toc-gradient-at-a-point" class="nav-link" data-scroll-target="#gradient-at-a-point">Gradient at a point</a></li>
+  <li><a href="#general-rules-of-differentiation" id="toc-general-rules-of-differentiation" class="nav-link" data-scroll-target="#general-rules-of-differentiation">General rules of differentiation</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Differentiation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>We will start with a basic question, what is the gradient of a line?</p>
+<p>The three plots below each have three straight lines. The first has a positive gradient (or positive slope) i.e.&nbsp;as <span class="math inline">\(x\)</span> increases so does <span class="math inline">\(y.\)</span> The second has a negative gradient, as <span class="math inline">\(x\)</span> increases <span class="math inline">\(y\)</span> decreases. The third has a zero gradient, as <span class="math inline">\(x\)</span> increases, there is no change in <span class="math inline">\(y\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="differentiation_files/figure-html/gradient-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s look at some more examples.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="differentiation_files/figure-html/gradient_complex-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the plots above, the gradient of the line is not constant, so how can we find the gradient of these lines at different points? The answer is <strong>differentiation</strong>.</p>
+<p><strong>Differentiation</strong> is used to find the rate of change of one variable with respect to another. In these examples, the variables are <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> but we may instead be interested in a biological relationship, say population size <span class="math inline">\(P\)</span> and time <span class="math inline">\(t\)</span>.</p>
+<p>This idea of specifying the rate of change of one variable with respect to another is used in infectious disease and ecological modelling. As modellers, we specify the gradient of the relationship between two variables as a function of biological processes,then we find the equation of the line to predict how the variables change with each other.</p>
+<p>Before we specify gradients as functions of biological processes, we will first learn how to find the gradient of the line from first principles.</p>
+</section>
+<section id="principle-of-differentiation" class="level2">
+<h2 class="anchored" data-anchor-id="principle-of-differentiation">Principle of differentiation</h2>
+<p>To learn the concept of differentiation, we will start with a plot of two variables, <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="differentiation_files/figure-html/diff1-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We want to understand the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>, more specifically we want to quantify the gradient of the line. The gradient of the line is the rate of change of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span>.</p>
+<p>We can see that the relationship is linear, therefore an appropriate equation for the line is <span class="math display">\[
+y = m x + c
+\]</span> where <span class="math inline">\(c\)</span> is the intercept and <span class="math inline">\(m\)</span> is the gradient (or slope) of the line.</p>
+<p>The intercept is the the value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>. In this example, we can read this value directly from the plot. When <span class="math inline">\(x = 0\)</span>, <span class="math inline">\(y = 1\)</span>. Therefore, <span class="math inline">\(c = 1\)</span>.</p>
+<p>The gradient of the line is <span class="math inline">\(m\)</span>. This value represents how much <span class="math inline">\(y\)</span> increases as a function of <span class="math inline">\(x\)</span>. We can find <span class="math inline">\(m\)</span> using the following equation:</p>
+<p><span class="math display">\[
+\begin{aligned}
+m&amp;= \frac{\mbox{change in $y$}}{\mbox{change in $x$}} \\
+&amp;= \frac{y_2-y_1}{x_2-x_1}
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\((x_1, y_1)\)</span> and <span class="math inline">\((x_2, y_2)\)</span> are two points on the line. Hence <span class="math inline">\(m\)</span> is the difference in two points on the <span class="math inline">\(y\)</span> axis divided by the difference of the two corresponding points on the <span class="math inline">\(x\)</span> axis. Evaluating the above equation will give us the gradient of the line between a pair of points.</p>
+<p>In our example, let’s select 5 pairs of points along the line.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="differentiation_files/figure-html/diff2-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>where <span class="math inline">\((x_1, y_1) = (0,1)\)</span>.</p>
+<p>We can calculate <span class="math inline">\(m\)</span> using <span class="math inline">\((x_1, y_1) = (0,1)\)</span> and <span class="math inline">\((x_2, y_2) = (1,3)\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+m &amp;= \frac{y_2-y_1}{x_2-x_1} \\
+&amp;= \frac{3-1}{1-0} \\
+&amp;= 2
+\end{aligned}
+\]</span> The gradient of the line between the points <span class="math inline">\((x_1, y_1)\)</span> and <span class="math inline">\((x_2, y_2)\)</span> is 2.</p>
+<p>Let’s repeat this calculation using two other points, <span class="math inline">\((x_2, y_2) = (1,3)\)</span> and <span class="math inline">\((x_4, y_4) = (4,9)\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+m &amp;= \frac{y_4-y_2}{x_4-x_2} \\
+&amp;= \frac{9-3}{4-1}\\
+&amp;= \frac{6}{3} \\
+&amp;= 2
+\end{aligned}
+\]</span> The gradient of the line between the points <span class="math inline">\((x_2, y_2)\)</span> and <span class="math inline">\((x_4, y_4)\)</span> is also 2.</p>
+<p>Because all of the points fall on a straight line, the gradient is the same anywhere along the line.</p>
+<p>Therefore, our equation of the line is,</p>
+<p><span class="math display">\[
+y = 2 x + 1.
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Find the value of <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> for the following line. Hint: find <span class="math inline">\(m\)</span> first and use this to find <span class="math inline">\(c\)</span> using <span class="math inline">\(y = m x + c\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="differentiation_files/figure-html/question2-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Using <span class="math inline">\((x_1, y_1) = (1,8)\)</span> and <span class="math inline">\((x_2, y_2) = (2,12)\)</span> <span class="math display">\[
+\begin{aligned}
+m &amp;= \frac{y_2-y_1}{x_2-x_1} \\
+&amp;= \frac{12-8}{2-1} \\
+&amp;= \frac{4}{1} \\
+&amp; = 4.
+\end{aligned}
+\]</span> We have,</p>
+<p><span class="math display">\[
+y = 4 x + c.
+\]</span></p>
+<p>Using, <span class="math inline">\((x_1, y_1) = (1,8)\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+y_1 &amp;= 4 x_1 + c \\
+8 &amp;= 4 * 1 + c \\
+c&amp; = 4.
+\end{aligned}
+\]</span> Therefore,</p>
+<p><span class="math display">\[
+y = 4 x + 4.
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="gradient-at-a-point" class="level2">
+<h2 class="anchored" data-anchor-id="gradient-at-a-point">Gradient at a point</h2>
+<p>In the previous lessons, we found the gradient between two points and then used this to find the equation of a straight line.</p>
+<p>What if we want to find the gradient at single point on the line? (instead of between two points)</p>
+<p>Let’s denote the point at which we want to find the gradient as <span class="math inline">\(x\)</span>, and denote some small difference along the <span class="math inline">\(x\)</span> axis as <span class="math inline">\(\Delta x\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="differentiation_files/figure-html/point-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If we say <span class="math inline">\(y = f(x)\)</span>, then we can re-write <span class="math inline">\(m\)</span> as follows,</p>
+<p><span class="math display">\[
+\begin{aligned}
+m &amp;= \frac{f(x+\Delta x)-f(x)}{x+\Delta x -x} \\
+&amp;= \frac{f(x+\Delta x)-f(x)}{\Delta x} \\
+\end{aligned}
+\]</span></p>
+<p>In our first example, we had <span class="math inline">\(y = 2 x + 1\)</span>. Now we use the notation <span class="math inline">\(f(x) = 2 x + 1\)</span>. Therefore,</p>
+<p><span class="math display">\[
+\begin{aligned}
+m &amp;= \frac{f(x+\Delta x)-f(x)}{x+\Delta x -x} \\
+&amp;= \frac{(2(x+\Delta x)+1)-(2x+1)}{\Delta x} \\
+&amp;= \frac{2x+2\Delta x+1-2x-1}{\Delta x} \\
+&amp;= \frac{2\Delta x}{\Delta x} \\
+&amp;= 2.
+\end{aligned}
+\]</span> As before!</p>
+<p>We have so far used <span class="math inline">\(m\)</span> here to denote the gradient of a straight line, but we will not always be finding the gradient of a straight line. In general we are finding the rate of change of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span>, so we from now we will write the gradient as:</p>
+<p><span class="math display">\[
+\mbox{gradient} = \frac{f(x+\Delta x)-f(x)}{\Delta x}
+\]</span></p>
+<p>Let’s now look at an example of a more complex line. The plot below is of the function <span class="math inline">\(y = x^2 + 4\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="differentiation_files/figure-html/point_x2-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s find the equation for the gradient of the line for any point <span class="math inline">\(x\)</span>.</p>
+<p>Here we have <span class="math inline">\(f(x)= x^2 + 4\)</span>. Using our new definition of the gradient,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mbox{gradient} &amp;= \frac{f(x+\Delta x)-f(x)}{\Delta x} \\
+&amp; = \frac{((x+\Delta x)^2 +4)-(x^2+4)}{\Delta x}  \\
+&amp; = \frac{x^2+2x\Delta x +(\Delta x)^2 +4-x^2-4}{\Delta x}  \\
+&amp; = \frac{2x\Delta x +(\Delta x)^2}{\Delta x}  \\
+&amp;=2x +\Delta x.
+\end{aligned}
+\]</span> In this example, the <span class="math inline">\(\Delta x\)</span> has not been cancelled out. What we say instead is that as <span class="math inline">\(\Delta x\)</span> becomes smaller, the gradient gets closer and closer to <span class="math inline">\(2x\)</span>.</p>
+<p>We write this using the mathematical symbol <span class="math inline">\(\to\)</span>. If we write <span class="math inline">\(\Delta x\to 0\)</span>, this means that <span class="math inline">\(\Delta x\)</span> gets closer to <span class="math inline">\(0\)</span> (also referred to as <span class="math inline">\(\Delta x\)</span> tends to <span class="math inline">\(0\)</span>).</p>
+<p>This leads us to the formal definition of a <em>derivative</em>,</p>
+<p><span class="math display">\[
+\frac{dy}{dx} =\mbox{lim}_{\Delta x\to 0} \frac{f(x+\Delta x)-f(x)}{\Delta x}
+\]</span> where <span class="math inline">\(\mbox{lim}\)</span> stands for “limit” i.e.&nbsp;what is the value of <span class="math display">\[\frac{f(x+\Delta x)-f(x)}{\Delta x}\]</span> as <span class="math inline">\(\Delta x\)</span> tends to <span class="math inline">\(0\)</span>.</p>
+<p>In this example, we have found that the derivative of <span class="math inline">\(y = x^2 + 4\)</span> is <span class="math inline">\(\frac{dy}{dx} = 2x\)</span>.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Finding gradients at points
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When <span class="math inline">\(x = -1\)</span>, the gradient is <span class="math inline">\(2x = -2\)</span> - a negative straight line.</p>
+<p>When is <span class="math inline">\(x= 2\)</span>, the gradient is <span class="math inline">\(x = 4\)</span>, a positive straight but also steeper.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">l =</span> <span class="dv">20</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">4</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">type =</span> <span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="differentiation_files/figure-html/point_x2_b-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Excercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Find the derivative of <span class="math inline">\(y = 3 x^2\)</span> and hence find the gradient at <span class="math inline">\(x =-1\)</span>, <span class="math inline">\(x=0\)</span> and <span class="math inline">\(x=1\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The derivative can be found as follows: <span class="math display">\[
+\begin{aligned}
+\frac{dy}{dx} &amp;=\mbox{lim}_{\Delta x\to 0} \frac{f(x+\Delta x)-f(x)}{\Delta x} \\
+&amp; = \frac{3(x+\Delta x)^2-3x^2}{\Delta x}  \\
+&amp; = \frac{3(x^2+2x\Delta x +(\Delta x)^2)-3x^2}{\Delta x} \\
+&amp; = \frac{3x^2+6x\Delta x +3(\Delta x)^2-3x^2}{\Delta x} \\
+&amp; = \frac{6x\Delta x +3(\Delta x)^2}{\Delta x}  \\
+&amp;=6x +3\Delta x \\
+&amp; \to 6x \quad \mbox{as} \quad \Delta x \to 0.
+\end{aligned}
+\]</span> At <span class="math inline">\(x = -1\)</span>, <span class="math inline">\(\frac{dy}{dx} = -6\)</span>.</p>
+<p>At <span class="math inline">\(x = 0\)</span>, <span class="math inline">\(\frac{dy}{dx} = 0\)</span>.</p>
+<p>At <span class="math inline">\(x = 1\)</span>, <span class="math inline">\(\frac{dy}{dx} = 6\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">l =</span> <span class="dv">20</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">*</span> x <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">type =</span> <span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="differentiation_files/figure-html/point_x-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="general-rules-of-differentiation" class="level2">
+<h2 class="anchored" data-anchor-id="general-rules-of-differentiation">General rules of differentiation</h2>
+<p>Every time we want to find the derivative of an equation, we don’t have to use the definition of derivative. Instead, we can use general rules of differentiation that have been derived from the definition.</p>
+<p>For example, it can be shown using the definition that the derivative of the function <span class="math inline">\(y = x^n\)</span> takes the form <span class="math inline">\(\frac{dy}{dx} = n x^{n-1}\)</span>.</p>
+<p>The function <span class="math inline">\(y = x^2\)</span> is in the format <span class="math inline">\(y = x^n\)</span> where <span class="math inline">\(n=2\)</span>. Hence the derivative is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{dy}{dx} &amp; = n x^{n-1} \\
+&amp; = 2 x^{2-1} \\
+&amp; = 2x.
+\end{aligned}
+\]</span></p>
+<p>The table below shows some common functions and their derivatives.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(y=f(x)\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\frac{dy}{dx}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(c\)</span></td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(x\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(cx\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(x^n\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(n x^{n-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(cx^n\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(cn x^{n-1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(e^x\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(e^x\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(e^cx\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(ce^cx\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(ln(x)\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(\frac{1}{x}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(ln(f(x))\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(\frac{1}{f(x)}\frac{d f(x)}{dx}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>As well as these rules for certain functions, there are also rules for functions which take particular forms. For example, a function which consists of two functions divided by each together :</p>
+<p><span class="math display">\[f(x) = \frac{x^2}{e^x}.\]</span></p>
+<p>For functions such as this we would use what is called the <em>quotient rule</em>. If a function is of the form:</p>
+<p><span class="math display">\[y = \frac{f(x)}{g(x)}\]</span></p>
+<p>using the quotient rule, the derivative of <span class="math inline">\(y\)</span> is:</p>
+<p><span class="math display">\[\frac{dy}{dx} = \frac{f'(x) g(x)-f(x)g'(x)}{[g(x)]^2}\]</span></p>
+<p>where <span class="math inline">\(f'(x)\)</span> is the derivative of <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g'(x)\)</span> is the derivative of <span class="math inline">\(g(x)\)</span>.</p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>We have spent some time understanding the concept of differentiation from first principles. In ecological and epidemiological modelling, we will use differentiation in the form of ordinary differential equations. Here we will specify the derivative of a function in terms of biological processes.</p>
+<p>This means that as well as understanding how to obtain the derivative of a function, we also need to understand how to obtain a function from it’s derivative. We do this using integration.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

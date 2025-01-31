@@ -1,0 +1,147 @@
+---
+title: "Integration"  
+---
+
+```{r setupi, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+```
+
+## Introduction
+
+Integration is used to find the anti-derivative. Previously, from a function $y=f(x)$ we found the derivative $\frac{dy}{dx}$ using differentiation. Now, starting from the derivative $\frac{dy}{dx}$ we will find $y=f(x)$ using integration.  
+
+Let's start by introducing two pieces of new notation: 
+
++ the integral sign, $\int$
++ with respect to $x$, $dx.$
+
+We will integrate the function 'inside' the integral sign $\int$ and with respect to the variable after $d$, for example we had a function $y=f(x)$ and the derivative is $\frac{dy}{dx} = f'(x)$.
+
+Then $\int f'(x) dx = f(x)$. 
+
+If instead our function was written with the variable $t$ instead of $x$, we would have $y=f(t)$, with derivative $\frac{dy}{dt} = f'(t)$ and  $\int f'(t) dt = f(t)$.
+
+### Example
+We have the derivative,
+
+$$
+\frac{dy}{dx}= 2x
+$$
+
+we want to find the integral.
+
+From what we have learnt from previous lessons, we know that, $f(x) = x^2 + c$ would be an appropriate function. 
+
+We add the constant $c$ as without any additional information, we do not know if there was a constant in $f(x)$ (remember that if $y = 2$, $\frac{dy}{dx}=0$). The constant $c$ is called the constant on integration. The following functions would both give the derivative $\frac{dy}{dx} = 2x$. 
+
+$$
+y(x) = x^2 + 4 
+$$
+
+$$
+y(x) = x^2 -12. 
+$$
+If we were given some initial information, we could find $C$. For example, we are given one pair of points $(x_1, y_1) = (1, -2)$. Which we can write as, 
+
+$$
+y(1) = 1^2 +c.
+$$
+Substituting $y(1) = -2$, we can find $C$,
+
+$$
+\begin{aligned}
+-2 &= 1^2 +c \\
+-2 -1 & = c \\
+c & = -3
+\end{aligned}
+$$
+Therefore our solution is $y(x) = x^2 - 3$. 
+
+::: {.callout-note icon="false}
+
+## Exercise
+Integrate the following functions (remember to add the constant of integration $c$).
+
+1. $f'(x) = 2$
+
+2. $f'(x) = e^x$
+
+3. $f'(t) = t^3$
+
+:::
+
+::: {.callout-note collapse="true" icon="false}
+## Solution
+
+1.$\int 2 dx = 2x + c$
+
+2. $\int e^x dx = e^x + c$ (from the table of derivatives in Differentiation III).
+
+3. $\int t^3 dt = \frac{t^4}{4} + c$.
+
+Note if $y = x^n$ then $\frac{dy}{dx} = n x^{n-1}$. Then if $F(x) = x^n$, then $\int x^n dx = \frac{x^{n+1}}{n+1}$. 
+
+:::
+
+## Separation of variables
+Just as there are differentiation rules, there are also integration rules. Hopefully from the previous exercises you would have found that you can find the integral of a function using what you know about differentiation. 
+
+There are some cases in which we need to know specific integration rules. In this lesson, we will learn the 'separation of variables' method, as this will be needed in our first ecological model : population growth.
+
+Consider the derivative,
+
+$$ \frac{dy}{dx} = 5y.$$
+
+Why is this different to the derivatives we have seen before? 
+
+On the right hand side of the equation we have $y$ and not $x$. Therefore, we cannot simply find the derivative as before. To solve this equation we will need to 'separate the variables'. We shall do this in steps.
+
+1. Separate the variables
+
+We move all of the terms including $y$ to the left hand side of the equation, and all the terms including $x$ to the right hand side of the equation. To this we multiply by $dx$:
+
+
+$$ dy = 5y dx$$
+and then divide by $y$
+
+$$ \frac{1}{y} dy = 5 dx.$$
+
+Now we have all terms including $y$ on the left hand side, and all terms including $x$ on the right hand side. 
+
+2. Integrate both sides
+
+The next step is to integrate both sides of the equation:
+
+$$ \int \frac{1}{y} dy = \int 5 dx$$
+We shall integrate the right hand side first,
+
+$$ \int \frac{1}{y} dy =  5x + c_1 $$
+
+where $c_1$ is our constant of integration. Next the left hand side,
+
+$$ \ln(y) + c_2 =  5x + c_1$$
+where $c_2$ is also a constant of integration, but this time from the left hand side of the equation. 
+
+3. Simplify the solution
+
+We can tidy up the solution by moving $c_2$ to the right hand side,
+
+$$ \ln(y) =  5x + c_1 - c_2.$$
+
+Then take the exponent of both sides (note that $e^{ln(y)} = y$).
+
+$$ y =  e^{5x + c_1 - c_2}.$$
+
+We can substitute $c = c_1 - c_2,$ 
+
+$$ y =  e^{5x + c}$$
+
+Then separate the two terms within the exponent:
+
+$$ y =  e^{5x}e^{c}.$$
+
+The term $e^c$ is a constant, as it does not contain $x$, therefore we can write $C=e^{x}$
+
+$$ y =  e^{5x}C.$$
+
+Therefore, the solution to $\frac{dy}{dx} = 5y$ is $y =  e^{5x}C$.

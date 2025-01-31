@@ -1,0 +1,71 @@
+---
+title: "Introduction"
+---
+
+
+Mathematical models can be used to represent a version reality. They are simple representations of complex processes, but they are useful nonetheless.  
+
+**Why do we use mathematical models?**
+
++ We can use models to make predictions of future infections, or of impact of interventions 
++ They help us to understand dynamics that we could not observe all at once in the ‘real world’.
++ We can model complex problems are difficult to study in the lab or field.
+
+**What do we model?**
+
+For a model to be useful, we need to be able to see which factors affect which outcomes
+If there are too many parameters, then changing one we might not be able to see the affect 
+This is related to the question, the model needs to be complex enough for the question but simple enough to make sense of the results 
+
+
+**How do we model?** 
+
+`How we model' is the focus of this course. We will learn to implement ordinary differential equation models to make predictions about infection spread. Take the output below for example, a classic epidemic peak. 
+
+```{r SIR_example, echo = FALSE}
+library(deSolve)
+SIR_model <- function(time, state_var, pars) {
+  # Extract state variables
+  S <- state_var["S"]
+  I <- state_var["I"]
+  R <- state_var["R"]
+  # Extract model parameters
+  beta <- pars["beta"]
+  gamma <- pars["gamma"]
+  # The differential equations
+  dS <- - beta * S * I
+  dI <- beta * S * I - gamma * I
+  dR <- gamma * I
+  # Return the solved equations as a list
+  sol <- list(c(dS, dI, dR))
+  return(sol)
+}
+
+# What are our parameter values?
+pars <- c(beta = 0.6, gamma = 0.14)
+
+# Define time to solve equations
+times <- seq(from = 0, to = 50, by = 1)
+
+# What are the initial values (or conditions) of the state variables?
+state_var <- c(S = 0.99, I = 0.01, R = 0)
+
+# Solve the Susceptible Infected equations over the vector of times , time
+# with initial conditions
+solution <- as.data.frame(ode(y = state_var, times = times, func = SIR_model,
+                              parms = pars, method = rk4))
+
+plot(solution$time, solution$S, col = "darkblue", lwd = 2,
+     type = "l", ylim = c(0, 1), ylab = "Number", xlab = "Time")
+lines(solution$time, solution$I, col = "darkred", lwd = 2, lty = 2)
+lines(solution$time, solution$R, col = "darkgreen", lwd = 2, lty = 3)
+legend(30, 0.6, c("Susceptible", "Infected", "Recovered"),
+       col = c("darkblue", "darkred", "darkgreen"),
+       lwd = 2, lty = c(1, 2, 3), bty = "n")
+```
+
++ What equations are used to make this plot?
++ What parameters are included in the equations?
++ What assumptions are made about how infections occur?
+
+We will learn the answers to all of these questions and more.

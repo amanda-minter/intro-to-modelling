@@ -1,0 +1,167 @@
+---
+title: "Modelling proportions or numbers"
+---
+
+```{r setup, include=FALSE}
+library(deSolve)
+```
+
+How do you switch between modelling the proportion or numbers of individuals in different disease states?  Assumptions about transmission affect our model parameter values under different outcomes of interest. Here we will cover definitions and code for Susceptible-Infectious-Recovered models where the outcome is either proportions or numbers.
+
+
+## Model assumptions
+
+Ordinary differential equation models can be used to predict the predict the proportions or the numbers of individuals in different infection states.
+
+An SIR model for proportions can be described by a system of three ODEs:
+
+$$
+\begin{aligned}
+\frac{dS}{dt} & = - \beta S I \\
+\frac{dI}{dt} &= \beta S I -\gamma I \\
+\frac{dR}{dt} &= \gamma I
+\end{aligned}
+$$
+
+In this model, the rate of new infections per time unit as a function of:
+
+the susceptible individuals $S,$
+the rate of contact between susceptible and infected individuals $c,$
+the probability that a susceptible individual contacts an infected individual $p,$
+the probability of successful transmission given contact $\nu$.
+
+Our infection process from can be written as the product of these terms:
+
+$$ c \nu S p. $$
+
+The probability that a susceptible individual contacts an infected individual is equal to the current prevalence. Our model is going to predict the proportion of individuals in each compartment, therefore, we can use $p=I$.
+
+The product of the rate of contact and the probability of successful transmission given contact gives the overall transmission rate, which we denote $\beta$. Therefore, $\beta=c\nu$.
+
+Our infection process can be written as:
+
+$$ \beta S I. $$
+
+We may instead wish to predict the numbers in each state. We can do this using the same equations, but with some changes to the notation.
+
+If we define $S=X/N$, $I=Y/N$ and $R=Z/N$ then we can write equations to predict numbers instead of proportions. Remember that in our formulation of infection, we assumed the probability of a susceptible contacting an infected was equal to the prevalence $p=I$. As we will now be predicting with numbers, prevalence is $p=Y/N$.
+
+Therefore our infection term changes from
+
+$$ \beta S I$$
+
+to
+
+$$ \beta X \frac{Y}{N}. $$
+
+Our system of ODEs is now,
+
+$$
+\begin{aligned}
+\frac{dX}{dt} & = - \beta X Y/ N \\
+\frac{dY}{dt} &= \beta X Y / N -\gamma Y \\
+\frac{dZ}{dt} &= \gamma Y
+\end{aligned}
+$$
+
+where $X$, $Y$ and $Z$ represent the numbers of susceptible, infected and recovered individuals respectively.
+
+## In R
+
+To find the solution to the SIR model predicting proportions and numbers we write two functions `SIR_prop_model()` and `SIR_numbers_model()`.
+
+```{r}
+SIR_model_prop <- function(time, state_var, pars) {
+  # Extract state variables
+  S <- state_var["S"]
+  I <- state_var["I"]
+  R <- state_var["R"]
+  # Extract model parameters
+  beta <- pars["beta"]
+  gamma <- pars["gamma"]
+  # The differential equations
+  dS <- - beta * S * I
+  dI <- beta * S * I - gamma * I
+  dR <- gamma * I
+  # Return the derivatives as a list
+  sol <- list(c(dS, dI, dR))
+  return(sol)
+}
+
+SIR_numbers_model <- function(time, state_var, pars) {
+  # Extract state variables
+  X <- state_var["X"]
+  Y <- state_var["Y"]
+  Z <- state_var["Z"]
+  N <- X + Y + Z
+  # Extract model parameters
+  beta <- pars["beta"]
+  gamma <- pars["gamma"]
+  # The differential equations
+  dX <- -beta * X * Y / N
+  dY <- beta * X * Y / N - gamma * Y
+  dZ <- gamma * Y
+  # Return the derivatives as a list
+  sol <- list(c(dX, dY, dZ))
+  return(sol)
+}
+```
+
+We must specify the initial sate to be proportions or numbers.
+
+```{r}
+state_var_prop <- c(S = 0.99, I = 0.01, R = 0)
+state_var_numbers <- c(X = 99, Y = 1, Z = 0)
+```
+
+Let’s compare the solutions to the ODE models using either proportions and numbers and using the same parameter values and time vector. Can you see how the solutions are related to each other?
+
+```{r}
+pars <- c(beta = 0.6, gamma = 0.14)
+times <- seq(from = 0, to = 50, by = 1)
+
+solution_prop <- as.data.frame(ode(y = state_var_prop, times = times,
+                                   func = SIR_model_prop,
+                                   parms = pars, method = rk4))
+
+solution_numbers <- as.data.frame(ode(y = state_var_numbers, times = times,
+                                      func = SIR_numbers_model,
+                                      parms = pars, method = rk4))
+
+head(cbind(solution_prop$I, solution_numbers$Y))
+```
+
+
+We have $I(t) = Y(t) / N$. That is, the solution of the proportion of infected individuals over time is equal to the solution of the number of infected individuals over time divided by the population size when we use the same parameter values.
+
+This is not always the case, it depends on the assumptions we make about our infection process. In the next lesson we will learn about why this is the case.
+
+## Frequency versus density dependence
+
+In frequency dependent transmission, the rate of infectious contacts increases with the frequency of infected individuals in the population:
+
+$$ \beta X \frac{Y}{N}.$$
+
+Instead, we may wish to assume that the rate of contact increases linearly with total constant population size $N$. This is commonly referred to as density dependent transmission:
+
+$$\beta' XY.$$
+
+When we are modelling numbers, our transmission rate in density dependent transmission is a different dimension to our transmission rate in frequency dependence. This means that that the value of $\beta$ is not the same.
+
+When we are working with proportions, then the total population size $N=1$. So any assumptions about the relationship between infection and density will not affect our formulation of the infection process. Meaning, there is no difference in the transmission rate between frequency or density dependence when working with proportions.
+
+In summary we have,
+
+| |Frequency dependent|Density dependent
+|---------------|:-------------:|------:|
+|Numbers| $\beta X\frac{Y}{N}$|$\beta' XY$|
+|Proportions|$\beta SI$|$\beta SI$|
+
+## Summary
+
+Modelling proportions or numbers is straightforward to implement given appropriate initial conditions and formulation of model equations.
+
+It is important to understand how our model assumptions will be affected by using proportions or numbers. The interpretation of transmission rate, and other processes, will change for the outcome being modelled.
+
+You will see the notation $S$ and $I$ used for both proportions and numbers, and the notation $\beta$ used for both frequency and density dependent transmission. Always seek out the model assumptions in order to understand the model solutions and the interpretation of model parameters.
+

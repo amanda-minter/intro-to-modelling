@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Maths of Infectious Disease Modelling - About</title>
+<title>The Maths of Infectious Disease Modelling - Extracting information</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,24 +20,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -59,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -69,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">The Maths of Infectious Disease Modelling</span>
     </a>
   </div>
@@ -98,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">About</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../R_notes/getting_started.html">R essentials</a></li><li class="breadcrumb-item"><a href="../R_notes/extracting_information.html">Extracting information</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -120,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
@@ -135,37 +170,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/differentiation.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/differentiation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differentiation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/ODE.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/ODE.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary differential equations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/numerical_integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/numerical_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/numerical_integration_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/numerical_integration_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical integration : Using deSolve</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Systems of ODE’s</span></a>
   </div>
 </li>
@@ -182,79 +217,79 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SI.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SI.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Susceptible - Infected model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIR.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIR.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SIR model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/R.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/freq_dens_dependence.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/freq_dens_dependence.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequency or density dependence</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/prop_numbers.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/prop_numbers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Modelling proportions or numbers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/R0.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/R0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basic reproduction number</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/NGM.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/NGM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Next Generation Matrix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIR_demography.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIR_demography.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Including demography</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIRS.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIRS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Test your understanding</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/sensitivity.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/sensitivity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sensitivity analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/events.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/events.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using events : vaccination</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/stochastic_discrete_time.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/stochastic_discrete_time.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BONUS : Stochastic models</span></a>
   </div>
 </li>
@@ -271,37 +306,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/getting_started.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/getting_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/extracting_information.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/extracting_information.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Extracting information</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/plots.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/plots.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basic plots</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/working_code.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/working_code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with code</span></a>
   </div>
 </li>
@@ -313,72 +348,219 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-  <ul>
-  <li><a href="#calculus-for-modelling" id="toc-calculus-for-modelling" class="nav-link active" data-scroll-target="#calculus-for-modelling">Calculus for Modelling</a></li>
-  <li><a href="#introduction-to-infectious-disease-modelling" id="toc-introduction-to-infectious-disease-modelling" class="nav-link" data-scroll-target="#introduction-to-infectious-disease-modelling">Introduction to Infectious Disease Modelling</a>
-  <ul class="collapse">
-  <li><a href="#r-essentials" id="toc-r-essentials" class="nav-link" data-scroll-target="#r-essentials">R Essentials</a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
-<div class="quarto-about-trestles">
-  <div class="about-entity">
+<main class="content" id="quarto-document-content">
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">Extracting information</h1>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    
+  
+    
   </div>
+  
+
 </header>
-    <div class="about-links">
-  <a href="https://www.linkedin.com/in/amanda-minter/" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">Linkedin</span>
-  </a>
-  <a href="https://github.com/amanda-minter" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
+
+<p>R can be used to visualise and analyse different types of data. Therefore we need to understand how to handle data in R.</p>
+<p>We will start with the data set called <code>women</code>. This data set can be loaded using the function <code>data</code> as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"women"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-  </div>
-  <div class="about-contents"><main class="content" id="quarto-document-content">
-
-<section id="calculus-for-modelling" class="level1">
-<h1>Calculus for Modelling</h1>
-<p>Have you just entered the world of infectious disease modelling? Are you ‘not a mathematician’? Understanding a few core topics of calculus will enable you to understand a wide range of mathematical models.</p>
-<p>These notes cover core calculus principles used in modelling, including:</p>
-<ul>
-<li>differentiation,</li>
-<li>integration (analytical and numerical),</li>
-<li>ordinary differential equations</li>
-<li>and more.</li>
-</ul>
-</section>
-<section id="introduction-to-infectious-disease-modelling" class="level1">
-<h1>Introduction to Infectious Disease Modelling</h1>
-<p>Understanding the principles of developing a model will give you the tools to understand any model.</p>
-<p>These notes cover key introductory topics will help you to understand more complex models :</p>
-<ul>
-<li>understanding how to write equations for simple infectious disease models,</li>
-<li>adding additional processes e.g.&nbsp;loss of immunity and demographic processes,</li>
-<li>solving ODE models in R,</li>
-<li>how to find the equilibrium states of ODE model,</li>
-<li>and more.</li>
-</ul>
-<section id="r-essentials" class="level2">
-<h2 data-anchor-id="r-essentials">R Essentials</h2>
-<p>These notes cover the absolute essentials of using (base) R. Aimed at those who want to go from zero to using R within an afternoon!</p>
-
-
-</section>
-</section>
-</main></div>
+<p>To view the data set, we can use the R function <code>View(women)</code>. This opens a new tab in our Source panel. Alternatively, we can view the first 6 rows of the data set in the console using the <code>head</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(women)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  height weight
+1     58    115
+2     59    117
+3     60    120
+4     61    123
+5     62    126
+6     63    129</code></pre>
 </div>
- <!-- /main -->
+</div>
+<p>The data set consists of two columns : height and weight. If you want to know more about the data set, you can visit the help page using <code>?women</code>.</p>
+<p>This data set is in the form of a <code>data.frame</code>. A <code>data.frame</code> stores variables of different classes in named columns and rows.</p>
+<p>We will learn how to extract particular columns, rows and values from our <code>data.frame</code>.</p>
+<p>Firstly, to find the dimension (the size) of our <code>data.frame</code>. We will use the function <code>dim</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(women)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15  2</code></pre>
+</div>
+</div>
+<p>Our data consists of 15 rows and 2 columns.</p>
+<p>If we want to extract particular values at certain rows and columns, we can type in the row and column number. For example, say we want the 1st row and the 1st column:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>women[<span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 58</code></pre>
+</div>
+</div>
+<p>Or the 7th value in the 2nd column,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>women[<span class="dv">7</span>, <span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 132</code></pre>
+</div>
+</div>
+<p>It’s more likely that we will want to perform calculations, or plot just one column of the data. We can extract columns from our data in different ways.</p>
+<p>Note how the following three methods all give the same result.</p>
+<p>Using the column number,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>women[, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72</code></pre>
+</div>
+</div>
+<p>Use the column name in place of the number,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>women[, <span class="st">"height"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72</code></pre>
+</div>
+</div>
+<p>Use the <code>$</code> symbol and the column name,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>women<span class="sc">$</span>height</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>women[, <span class="st">"height"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72</code></pre>
+</div>
+</div>
+<p>We can use the first two of these methods to extract rows. Note here that the rownames are the same as the row numbers, but this might not always be the case.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>women[<span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  height weight
+1     58    115</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>women[<span class="st">"1"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  height weight
+1     58    115</code></pre>
+</div>
+</div>
+<p>We can extract statistical summary information from our data set using the <code>summary</code> function. This function will give measures such as the mean and median for each column on the data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(women)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     height         weight     
+ Min.   :58.0   Min.   :115.0  
+ 1st Qu.:61.5   1st Qu.:124.5  
+ Median :65.0   Median :135.0  
+ Mean   :65.0   Mean   :136.7  
+ 3rd Qu.:68.5   3rd Qu.:148.0  
+ Max.   :72.0   Max.   :164.0  </code></pre>
+</div>
+</div>
+<p>Let’s say we want to look at sections of our data, more specifically, we want to look at the heights for women who weighed more than the average.</p>
+<p>We can extract the correct column name using the <code>$</code> symbol and we use the <code>which</code> function to find the row numbers for which the weight is more than the average, 136.7.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(women<span class="sc">$</span>weight <span class="sc">&gt;</span> <span class="fl">136.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  9 10 11 12 13 14 15</code></pre>
+</div>
+</div>
+<p>We can improve this code by using the R function <code>mean</code> to find the average, and assign this value to <code>mean_weight</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mean_weight <span class="ot">&lt;-</span> <span class="fu">mean</span>(women<span class="sc">$</span>weight)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(women<span class="sc">$</span>weight <span class="sc">&gt;</span> mean_weight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  9 10 11 12 13 14 15</code></pre>
+</div>
+</div>
+<p>Our final step to find the heights is to assign the row numbers to <code>which_rows</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mean_weight <span class="ot">&lt;-</span> <span class="fu">mean</span>(women<span class="sc">$</span>weight)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>which_rows <span class="ot">&lt;-</span> <span class="fu">which</span>(women<span class="sc">$</span>weight <span class="sc">&gt;</span> mean_weight)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>women[which_rows, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   height weight
+9      66    139
+10     67    142
+11     68    146
+12     69    150
+13     70    154
+14     71    159
+15     72    164</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Find the weights of women with heights less than or equal to the median height of the sample. The subset of the data set you should obtain is:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  height weight
+1     58    115
+2     59    117
+3     60    120
+4     61    123
+5     62    126
+6     63    129
+7     64    132
+8     65    135</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Firstly, we find the median height of women in the sample and name this object <code>median_height</code>. Next, we find for which rows contain a height less than or equal to the median height. Finally, we extract the corresponding rows of the data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>median_height <span class="ot">&lt;-</span> <span class="fu">median</span>(women<span class="sc">$</span>height)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>which_rows <span class="ot">&lt;-</span> <span class="fu">which</span>(women<span class="sc">$</span>height <span class="sc">&lt;=</span> median_height)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>women[which_rows, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  height weight
+1     58    115
+2     59    117
+3     60    120
+4     61    123
+5     62    126
+6     63    129
+7     64    132
+8     65    135</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -399,6 +581,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

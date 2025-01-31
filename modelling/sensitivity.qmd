@@ -1,0 +1,324 @@
+---
+title: "Sensitivity analysis"
+output: html_document
+date: "2024-08-16"
+---
+
+```{r setup, include=FALSE}
+library(deSolve)
+library(sensitivity)
+library(FME)
+```
+
+Deciding which parameters to use, what ranges and what method of sensitivity analysis depends on the question at hand. Here we introduce the concept of sensitivity analysis of infectious disease models. Using the SEIR model, we perform sensitivity analysis of model parameters on their effect on model outcomes epidemic peak time and size using visualisations and PRCC sensitivity analysis.
+
+## Setting up
+
+For this example, we will use the SEIR model. The model is described by a system of ordinary differential equations. Individuals move from the $S$ to the $E$ state via frequency dependent transmission with transmission rate $\beta=0.6$. They then move from the exposed state $E$, to the infectious state $I$ after the latent period $1/\sigma=4$ days. Recovery occurs on average after a period of 7 days ($1/\gamma=7)$.
+
+$$
+\begin{aligned}
+\frac{dS}{dt} & = - \beta S I/N \\
+\frac{dE}{dt} &= \beta S I/N - \sigma E \\
+\frac{dI}{dt} &= \sigma E - \gamma I \\
+\frac{dR}{dt} &=\gamma I \\
+\end{aligned}
+$$
+
+To set up our sensitivity analysis, the are two steps we need to consider:
+
+1.  Define the outcome that we will measure the effect of.
+
+The SEIR model output gives us the number of individuals in each state $S$, $E$, $I$ and $R$ through time.
+
+```{r echo = FALSE,  fig.width = 5, fig.height = 5}
+SEIR_model <- function(time, state_var, pars) {
+  # Extract state variables
+  S <- state_var["S"]
+  E <- state_var["E"]
+  I <- state_var["I"]
+  R <- state_var["R"]
+
+  N <- S + E + I + R
+  # Extract model parameters
+  beta <- pars["beta"]
+  gamma <- pars["gamma"]
+  sigma <- pars["sigma"]
+
+  # The differential equations
+  dS <- -beta * S * I / N
+  dE <- beta * S * I / N - sigma * E
+  dI <- sigma * E - gamma * I
+  dR <- gamma * I
+
+  # Return the  equations as a list
+  sol <- list(c(dS, dE, dI, dR))
+  return(sol)
+}
+
+# Define time to solve equations
+times <- seq(from = 0, to = 100, by = 1)
+
+# Parameters
+infectious_period <- 7
+latent_period <- 4
+pars <- c(beta = 0.6, gamma = 1 / infectious_period,
+          sigma = 1 / latent_period)
+
+# Initial state with infections present
+N <- 10000
+I0 <- 1
+state_var <- c(S = N - I0, E = 0, I = I0, R = 0)
+
+# Solve the Susceptible Infected equations over the vector of times , time
+# with initial conditions
+solution <- as.data.frame(ode(y = state_var, times = times, func = SEIR_model,
+                              parms = pars, method = rk4))
+
+# Plot of output
+plot(solution$time, solution$S, col = "darkblue", lwd = 2,
+     type = "l", ylim = c(0, N), ylab = "Number", xlab = "Time (days)",
+     main = "SEIR")
+lines(solution$time, solution$E, col = "purple", lwd = 2, lty = 4)
+lines(solution$time, solution$I, col = "darkred", lwd = 2, lty = 2)
+lines(solution$time, solution$R, col = "darkgreen", lwd = 2, lty = 3)
+legend(60, N * 0.75, c("Susceptible", "Exposed", "Infected", "Recovered"),
+       col = c("darkblue", "purple", "darkred", "darkgreen"),
+       lwd = 2, lty = c(1, 4, 2, 3), bty = "n")
+
+# Epidemic peak size and time
+peak_size <- solution$I[which.max(solution$I)]
+peak_time <- solution$time[which.max(solution$I)]
+
+```
+
+Using this model output we will extract two outcomes of interest:
+
+-   the epidemic peak time,
+-   epidemic peak size.
+
+In the plot above, the epidemic peak time is `r peak_time` and the epidemic peak size is `r round(peak_size)`.
+
+2.  Decide what ranges of parameter values to explore
+
+Our parameter ranges must be biologically realistic. For example, we think the infectious period for our study disease could range between 4 and 12 days based on estimates and studies in the published literature. There is no need to explore the infectious periods that are many months or years long, as this would not be appropriate for the disease at hand.
+
+In this example, we will use the following parameter ranges in our sensitivity analysis.
+
+|  Parameter |        Definition |     Range |
+|-----------:|------------------:|----------:|
+| $1/\sigma$ |     Latent period |     (2,4) |
+| $1/\gamma$ | Infectious period |    (4,12) |
+|    $\beta$ | Transmission rate | (0.4,0.8) |
+
+## Exploring relationships
+
+We will include the latent period ($1/\sigma$), the infectious period ($1/\gamma$) and the transmission rate ($\beta$) in our sensitivity analysis.
+
+Firstly, we will explore the visual changes in our model output when we change parameter values. The first plot below shows how the SEIR model solution changes when we change the value of the latent period ($1/\sigma$). As latent period increases, epidemic peak time is pushed forward in time. The epidemic peak size is higher for shorter latent periods.
+
+```{r echo = F, fig.width = 12, fig.height = 4 }
+# Set up empty data frame to store results
+results_latent <- setNames(data.frame(matrix(ncol = 4, nrow = 0)),
+                           c("latent_period", "R0", "peak_time", "peak_size"))
+
+# Latent period values
+latent_period_vec <- seq(2, 6, by = 1)
+
+par(mfrow = c(1, 3))
+# Run model for different values
+for (i in seq_along(latent_period_vec)) {
+  latent_period <- latent_period_vec[i]
+  pars <- c(beta = 0.6, gamma = 1 / 7,
+            sigma = 1 / latent_period)
+  solution <- as.data.frame(ode(y = state_var, times = times, func = SEIR_model,
+                                parms = pars, method = rk4))
+  results_latent[i, ] <-  data.frame(latent_period = latent_period,
+                              R0 = as.numeric(pars["beta"] / pars["gamma"]),
+                              peak_time = solution$time[which.max(solution$I)],
+                              peak_size = solution$I[which.max(solution$I)])
+  if (latent_period %in% c(2, 4, 6)) {
+    plot(solution$time, solution$I, col = "darkred", lwd = 2, lty = 2,
+         type = "l", ylim = c(0, 5000), ylab = "Number", xlab = "Time",
+         main = paste("Latent period = ", latent_period))
+  }
+}
+
+```
+
+The plot below shows the epidemic peak size and time for different values of the latent period, infectious period and transmission rate respectively. The circle indicates the fixed value. From this plot we can look at the direction of the relationship and how much the outcome changes. We see that the epidemic peak time increases for longer latent periods, whereas the peak size decreases.
+
+The direction of the relationship between the model outcomes and the infectious period/transmission rate are the same. The epidemic peak time decreases for longer infectious periods and higher transmission rates. Whereas the epidemic peak size increase for longer infectious periods and higher transmission rates.
+
+The plots can be used to infer whether the relationship between the outcome and the parameter is monotonic, which is a requirement for the formal sensitivity analysis in the next section.
+
+```{r echo = F,  fig.width = 6, fig.height = 8}
+# Set up empty data frame to store results
+results_ip <- setNames(data.frame(matrix(ncol = 4, nrow = 0)),
+                       c("infectious_period", "R0", "peak_time", "peak_size"))
+
+# Infectious period values
+infectious_period_vec <- seq(4, 12, l = 9)
+
+par(mfrow = c(1, 3))
+# Run model for different values
+for (i in seq_along(infectious_period_vec)){
+  infectious_period <- infectious_period_vec[i]
+  pars <- c(beta = 0.6, gamma = 1 / infectious_period,
+            sigma = 1 / 4)
+  solution <- as.data.frame(ode(y = state_var, times = times, func = SEIR_model,
+                                parms = pars, method = rk4))
+  results_ip[i, ] <-  data.frame(infectious_period = infectious_period,
+                              R0 = as.numeric(pars["beta"] / pars["gamma"]),
+                              peak_time = solution$time[which.max(solution$I)],
+                              peak_size = solution$I[which.max(solution$I)])
+}
+
+
+# Set up empty data frame to store results
+results_tr <- setNames(data.frame(matrix(ncol = 4, nrow = 0)),
+                       c("transmission_rate", "R0", "peak_time", "peak_size"))
+
+# Transmission rate values
+transmission_rate_vec <- seq(0.3, 0.9, length = 9)
+
+par(mfrow = c(1, 3))
+# Run model for different values
+for (i in seq_along(transmission_rate_vec)) {
+  transmission_rate <- transmission_rate_vec[i]
+  pars <- c(beta = transmission_rate, gamma = 1 / 7,
+            sigma = 1 / 4)
+  solution <- as.data.frame(ode(y = state_var, times = times, func = SEIR_model,
+                                parms = pars, method = rk4))
+  results_tr[i, ] <-  data.frame(transmission_rate = transmission_rate,
+                              R0 = as.numeric(pars["beta"] / pars["gamma"]),
+                              peak_time = solution$time[which.max(solution$I)],
+                              peak_size = solution$I[which.max(solution$I)])
+}
+
+par(mfrow = c(3, 2))
+plot(results_latent$latent_period, results_latent$peak_time,
+     ylab = "Epidemic peak time", xlab = "Latent period", pch = 19,
+     ylim = c(min(results_latent$peak_time), max(results_latent$peak_time)))
+points(results_latent$latent_period[which(results_latent$latent_period == 4)],
+       results_latent$peak_time[which(results_latent$latent_period == 4)],
+       cex = 3)
+
+plot(results_latent$latent_period, results_latent$peak_size,
+     ylab = "Epidemic peak size", xlab = "Latent period", pch = 19,
+     ylim = c(min(results_latent$peak_size), max(results_latent$peak_size)))
+points(results_latent$latent_period[which(results_latent$latent_period == 4)],
+       results_latent$peak_size[which(results_latent$latent_period == 4)],
+       cex = 3)
+
+plot(results_ip$infectious_period, results_ip$peak_time,
+     ylab = "Epidemic peak time", xlab = "infectious period", pch = 19,
+     ylim = c(min(results_ip$peak_time), max(results_ip$peak_time)))
+points(results_ip$infectious_period[which(results_ip$infectious_period == 7)],
+       results_ip$peak_time[which(results_ip$infectious_period == 7)],
+       cex = 3)
+
+plot(results_ip$infectious_period, results_ip$peak_size,
+     ylab = "Epidemic peak size", xlab = "infectious period", pch = 19,
+     ylim = c(min(results_ip$peak_size), max(results_ip$peak_size)))
+points(results_ip$infectious_period[which(results_ip$infectious_period == 7)],
+       results_ip$peak_size[which(results_ip$infectious_period == 7)], cex = 3)
+
+tr_2dp <- round(results_tr$transmission_rate, 2)
+
+plot(results_tr$transmission_rate, results_tr$peak_time,
+     ylab = "Epidemic peak time", xlab = "Transmission rate", pch = 19,
+     ylim = c(min(results_tr$peak_time), max(results_tr$peak_time)))
+points(results_tr$transmission_rate[which(tr_2dp == 0.6)],
+       results_tr$peak_time[which(tr_2dp == 0.6)], cex = 3)
+
+plot(results_tr$transmission_rate, results_tr$peak_size,
+     ylab = "Epidemic peak size", xlab = "Transmission rate", pch = 19,
+     ylim = c(min(results_tr$peak_size), max(results_tr$peak_size)))
+points(results_tr$transmission_rate[which(tr_2dp  == 0.6)],
+       results_tr$peak_size[which(tr_2dp == 0.6)], cex = 3)
+```
+
+We can also use these figures to see which parameter range has the widest range in model outcomes. The biggest range in epidemic peak time is for our given range of transmission rate. Whereas the biggest range in epidemic peak size is for our range of infectious period.
+
+At this point we can ask ourselves do we need a narrower range of values for our results to be meaningful? If we see a very large range of outcome for our parameter ranges, is there any other information we can obtain to narrow what our range of values is.
+
+## Formal sensitivity analysis
+
+Visualisations are very useful for understanding model behaviour for our parameter ranges. It is also useful to use methods to quantify the effect of changing input parameters on our outcomes.
+
+Partial rank correlation coefficient (PRCC) provides a measure of correlation between an input parameter and an outcome of interest, while accounting for changes in all other input parameters. It can be used for non-linear relationships, but must the relationships must be monotonic (the gradient remains positive or negative).
+
+PRCC values are between 1 and -1. A value above 0 means *positive* correlation and value below 0 means a *negative* correlation. The closer the value to 1, or -1, the stronger the correlation.
+
+See Wu et al. (2013) for details on PRCC formulation.
+
+To perform PRCC in R, we must complete the following steps :
+
+1.  Simulate a range of parameter values.
+
+We will use Latin hypercube sampling (LHS) is a sampling method that ensures that the whole range of possible values are sampled by 'remembering' previous samples. We will use the R package `{FME}` and function `Latinhyper()`
+
+2.  Calculate the outcome of interest for these input parameters
+
+In our example, we must solve the SEIR model for each combination of parameters, then extract the epidemic peak time and size
+
+3.  Using the parameter ranges and the outputs, calculate the PRCC
+
+In R, we need the R package `{sensitivity}`. The full R script to perform the PRCC sensitivity analysis is attached as an exercise file to this lesson.
+
+The results of the sensitivity analysis shown in the table below. The PRCC align with our visual check. The plots with a negative relationship resulted in a negative coefficient, and the plots with a positive relationship resulted in a positive coefficient.
+
+```{r, eval  = FALSE}
+set.seed(200)
+# Set the ranges of parameters
+par_ranges <- data.frame(min = c(2, 4, 0.4),
+                         max = c(4, 12, 0.8))
+rownames(par_ranges) <- c("latent_period", "infectious_period", "beta")
+
+# Create the Latin hypercube
+n <- 10000
+lhs_pars <- as.data.frame(Latinhyper(par_ranges, n))
+
+# Find the outcome of interest for the parameter combinations
+times <- seq(from = 0, to = 365, by = 1)
+output_time <- matrix(nrow = n, ncol = 1)
+output_size <- matrix(nrow = n, ncol = 1)
+for (i in 1:n){
+  # Extract parameters from Latin hypercube
+  pars <- c(beta = lhs_pars$beta[i],
+            gamma = 1 / lhs_pars$infectious_period[i],
+            sigma = 1 / lhs_pars$latent_period[i])
+  # Find the model solution
+  solution <- as.data.frame(ode(y = state_var, times = times,
+                                func = SEIR_model, parms = pars,
+                                method = rk4))
+  # Store the outcomes
+  output_time[i] <- solution$time[which.max(solution$I)]
+  output_size[i] <- solution$I[which.max(solution$I)]
+}
+
+# Perform sensitivity analysis of the two outcomes
+# Specify rank = TRUE to perform PRCC (instead of PCC)
+sens_output_time <- pcc(X = lhs_pars, y = output_time, rank = TRUE)
+print(sens_output_time)
+
+sens_output_size <- pcc(X = lhs_pars, y = output_size, rank = TRUE)
+print(sens_output_size)
+```
+
+The largest PRCC are for the infectious period and peak size, and the transmission rate and peak time. Recall that the largest ranges of outcomes were for these combinations of parameter and outcomes.
+
+## Summary
+
+Sensitivity analysis is a useful tool in infectious disease modelling to help answer a number of questions:
+
+Is the model behaving the way it should be? Do we need a narrower range of values for our results to be meaningful? What is the strength of the effect and what direction? How would our model results change if we used a different parameter value in our range?
+
+In this example, we included all model parameters in our sensitivity analysis. There will be some cases where not all parameters are included in the sensitivity analysis. If the purpose of the sensitivity analysis is to show the effect of parameters that were altered for an analysis, for example parameters are altered in value to show the effect of interventions (with all other parameters fixed in value). then a sensitivity analysis of subset of the parameters would be suitable.
+
+There are other formal methods of sensitivity analysis besides PRCC. For example, Sobol indices is a variance based sensitivity analysis which calculates sensitivity 'indices' by dividing up the variance of the output of a function into fractions to be attributed to inputs (Wu et al. (2013).
+
+## References
+
+Wu, Jianyong, Radhika Dhingra, Manoj Gambhir, and Justin V. Remais. "Sensitivity analysis of infectious disease models: methods, advances and their application." Journal of The Royal Society Interface 10, no. 86 (2013): 20121018.

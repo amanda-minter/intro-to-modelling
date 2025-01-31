@@ -1,0 +1,132 @@
+---
+title: " Extracting information"
+---
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, dev = "png",
+                      fig.width = 5, fig.height = 5)
+```
+
+
+R can be used to visualise and analyse different types of data. Therefore we need to understand how to handle data in R.
+
+We will start with the data set called `women`. This data set can be loaded using the function `data` as follows:
+```{r dataw}
+data("women")
+```
+To view the data set, we can use the R function `View(women)`. This opens a new tab in our Source panel. Alternatively, we can view the first 6 rows of the data set in the console using the `head` function:
+
+```{r data_head}
+head(women)
+```
+
+The data set consists of two columns : height and weight. If you want to know more about the data set, you can visit the help page using `?women`.
+
+This data set is in the form of a `data.frame`. A `data.frame` stores variables of different classes in named columns and rows. 
+
+We will learn how to extract particular columns, rows and values from our `data.frame`. 
+
+Firstly, to find the dimension (the size) of our `data.frame`. We will use the function `dim`:
+
+```{r dim}
+dim(women)
+```
+Our data consists of 15 rows and 2 columns. 
+
+If we want to extract particular values at certain rows and columns, we can type in the row and column number. For example, say we want the 1st row and the 1st column:
+
+```{r extract}
+women[1, 1]
+
+```
+
+Or the 7th value in the 2nd column,
+
+```{r extract2}
+women[7, 2]
+```
+
+It's more likely that we will want to perform calculations, or plot just one column of the data. We can extract columns from our data in different ways. 
+
+Note how the following three methods all give the same result.
+
+Using the column number, 
+```{r columns}
+women[, 1]
+```
+
+Use the column name in place of the number, 
+```{r columns2}
+women[, "height"]
+```
+
+Use the `$` symbol and the column name, 
+```{r columns3}
+women$height
+women[, "height"]
+```
+
+We can use the first two of these methods to extract rows. Note here that the rownames are the same as the row numbers, but this might not always be the case.
+
+```{r rows}
+women[1, ]
+women["1", ]
+```
+
+We can extract statistical summary information from our data set using the `summary` function. This function will give measures such as the mean and median for each column on the data set.
+
+```{r summary, echo = TRUE}
+summary(women)
+```
+
+Let's say we want to look at sections of our data, more specifically, we want to look at the heights for women who weighed more than the average. 
+
+We can extract the correct column name using the `$` symbol and we use the `which` function to find the row numbers for which the weight is more than the average, `r round(mean(women$weight),1)`.
+
+```{r extract3, echo = TRUE}
+which(women$weight > 136.7)
+```
+
+We can improve this code by using the R function `mean` to find the average, and assign this value to `mean_weight`:
+
+```{r extract4, echo = TRUE}
+mean_weight <- mean(women$weight)
+which(women$weight > mean_weight)
+```
+
+Our final step to find the heights is to assign the row numbers to `which_rows` :
+
+```{r extract6, echo = TRUE}
+mean_weight <- mean(women$weight)
+which_rows <- which(women$weight > mean_weight)
+
+women[which_rows, ]
+```
+
+::: {.callout-note icon="false}
+
+## Exercise
+
+Find the weights of women with heights less than or equal to the median height of the sample. The subset of the data set you should obtain is:
+```{r task1, echo = FALSE}
+median_height <- median(women$height)
+which_rows <- which(women$height <= median_height)
+
+women[which_rows, ]
+```
+:::
+
+::: {.callout-note collapse="true" icon="false}
+## Solution
+
+Firstly, we find the median height of women in the sample and name this object `median_height`. Next, we find for which rows contain a height less than or equal to the median height. Finally, we extract the corresponding rows of the data frame.
+
+```{r task_quiz, echo = TRUE}
+median_height <- median(women$height)
+which_rows <- which(women$height <= median_height)
+women[which_rows, ]
+```
+
+
+:::
+

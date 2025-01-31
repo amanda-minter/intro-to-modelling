@@ -1,0 +1,44 @@
+---
+title: "R packages"
+---
+
+```{r setup3r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.path = "figure")
+```
+
+
+In the previous sections we have used 'built in' R functions such as `mean`, `max` and `min`. 
+
+R packages contain additional functions, written and developed by the R community. These packages can contain data sets and functions to perform specialised analysis or graphics. 
+
+To download an R package, click on Packages in the Files / Plots / Packages / Help panel, then click on Install package(s). The default option will be to download packages from ‘Repository (CRAN)’, this is where many R packages are uploaded to. In the ‘Packages’ box you can type the name of the package you want to download. 
+
+Try downloading the package `{RColorBrewer}` by typing the package name into the ‘Packages’ box and clicking ‘Install’. 
+
+After downloading an R package it will be listed under Packages in the Files / Plots / Packages / Help panel. To use the functions in a package, we must load the R package using `library(packagename)`.
+
+Type `library(RColorBrewer)` into your R script and run the line. The package will now be loaded and you can use the functions the package contains. .
+
+::: {.callout-note icon="false}
+
+## Exercise
+
+A colleague has sent you some code to make a map of Brazil, but when you run their code you see that you don't have the required package installed. 
+```{r package, echo=TRUE, error = TRUE}
+map("world", "Brazil") # Map of Brazil
+map.cities(country = "Brazil") # Add a point for each city
+```
+
+Using a search engine, find the package, install it, and run the code.
+:::
+
+::: {.callout-note collapse="true" icon="false}
+## Solution
+
+```{r package2, echo = TRUE, warning = FALSE}
+library("maps")
+map("world", "Brazil")
+map.cities(country = "Brazil")
+```
+
+:::

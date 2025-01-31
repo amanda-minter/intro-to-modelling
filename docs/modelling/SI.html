@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Maths of Infectious Disease Modelling - About</title>
+<title>The Maths of Infectious Disease Modelling - The Susceptible - Infected model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,21 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -58,8 +59,10 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -69,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">The Maths of Infectious Disease Modelling</span>
     </a>
   </div>
@@ -98,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">About</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../modelling/introduction.html">Introduction to Infectious Disease Modelling</a></li><li class="breadcrumb-item"><a href="../modelling/SI.html">The Susceptible - Infected model</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -120,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
@@ -135,37 +138,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/differentiation.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/differentiation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differentiation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/ODE.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/ODE.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary differential equations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/numerical_integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/numerical_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/numerical_integration_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/numerical_integration_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical integration : Using deSolve</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Systems of ODE’s</span></a>
   </div>
 </li>
@@ -182,79 +185,79 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SI.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SI.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">The Susceptible - Infected model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIR.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIR.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SIR model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/R.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/freq_dens_dependence.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/freq_dens_dependence.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequency or density dependence</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/prop_numbers.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/prop_numbers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Modelling proportions or numbers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/R0.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/R0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basic reproduction number</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/NGM.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/NGM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Next Generation Matrix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIR_demography.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIR_demography.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Including demography</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIRS.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIRS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Test your understanding</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/sensitivity.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/sensitivity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sensitivity analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/events.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/events.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using events : vaccination</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/stochastic_discrete_time.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/stochastic_discrete_time.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BONUS : Stochastic models</span></a>
   </div>
 </li>
@@ -271,37 +274,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/getting_started.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/getting_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/extracting_information.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/extracting_information.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Extracting information</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/plots.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/plots.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basic plots</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/working_code.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/working_code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with code</span></a>
   </div>
 </li>
@@ -315,70 +318,129 @@ ul.task-list li input[type="checkbox"] {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
+   
   <ul>
-  <li><a href="#calculus-for-modelling" id="toc-calculus-for-modelling" class="nav-link active" data-scroll-target="#calculus-for-modelling">Calculus for Modelling</a></li>
-  <li><a href="#introduction-to-infectious-disease-modelling" id="toc-introduction-to-infectious-disease-modelling" class="nav-link" data-scroll-target="#introduction-to-infectious-disease-modelling">Introduction to Infectious Disease Modelling</a>
-  <ul class="collapse">
-  <li><a href="#r-essentials" id="toc-r-essentials" class="nav-link" data-scroll-target="#r-essentials">R Essentials</a></li>
-  </ul></li>
+  <li><a href="#the-susceptible---infected-model" id="toc-the-susceptible---infected-model" class="nav-link active" data-scroll-target="#the-susceptible---infected-model">The Susceptible - Infected model</a></li>
+  <li><a href="#the-si-model-continued" id="toc-the-si-model-continued" class="nav-link" data-scroll-target="#the-si-model-continued">The SI model continued</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<div class="quarto-about-trestles">
-  <div class="about-entity">
+<main class="content" id="quarto-document-content">
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">The Susceptible - Infected model</h1>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    
+  
+    
   </div>
+  
+
 </header>
-    <div class="about-links">
-  <a href="https://www.linkedin.com/in/amanda-minter/" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">Linkedin</span>
-  </a>
-  <a href="https://github.com/amanda-minter" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-</div>
-  </div>
-  <div class="about-contents"><main class="content" id="quarto-document-content">
 
-<section id="calculus-for-modelling" class="level1">
-<h1>Calculus for Modelling</h1>
-<p>Have you just entered the world of infectious disease modelling? Are you ‘not a mathematician’? Understanding a few core topics of calculus will enable you to understand a wide range of mathematical models.</p>
-<p>These notes cover core calculus principles used in modelling, including:</p>
+<p>As modellers, we specify the rate of change of our variable of interest based on our assumptions about biological processes. The key to understanding epidemic models is to understand the assumptions being made about infection spread, and the impact of these assumptions on the predicted dynamics over time.</p>
+<section id="the-susceptible---infected-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-susceptible---infected-model">The Susceptible - Infected model</h2>
+<p>The first model we will introduce is the Susceptible – Infected or SI model. In this model, individuals are in one of two disease states, susceptible or infected (and infectious). We refer to these disease states as different ‘compartments’.</p>
+<p>The schematic below represents our model in the form of a flow diagram. There are two compartments: ‘S’ for susceptible and ‘I’ for infected, and there is one process whereby individuals can move from ‘S’ to ‘I’, infection:</p>
+<p><img src="SI_words.png" class="img-fluid"></p>
+<p>To predict the flow between the two compartments, we will use ordinary differential equations (ODEs). Here we are interested in modelling the rate of change of the number of individuals in each compartment with respect to time.</p>
+<p>We will write an ODE for each compartment. Therefore we will have two equations. We have one process whereby individuals leave the ‘S’ class and those same individuals are added to the ‘I’ class:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mbox{susceptible population rate of change} &amp; = - \mbox{infections} \\
+\mbox{infected population rate of change} &amp;= + \mbox{infections}
+\end{aligned}
+\]</span></p>
+<p>We denote the number of susceptible <span class="math inline">\(S\)</span> and the number of infected individuals <span class="math inline">\(I\)</span>. We are interested in the rate of population change of these variable <span class="math inline">\(S\)</span> and <span class="math inline">\(I\)</span> over time, which we will denote <span class="math inline">\(t\)</span>.</p>
+<p>The susceptible population rate of change with respect to time is written as <span class="math inline">\(\frac{dS}{dt}\)</span> (similarly the infected population rate of change is <span class="math inline">\(\frac{dI}{dt}\)</span>).</p>
+<p>In this model, the population rate of change is defined by only one process : infection. Next we must formulate the rate of new infections per time unit as a function of:</p>
 <ul>
-<li>differentiation,</li>
-<li>integration (analytical and numerical),</li>
-<li>ordinary differential equations</li>
-<li>and more.</li>
+<li>the number of susceptible individuals (<span class="math inline">\(S\)</span>)</li>
+<li>the probability that a susceptible contacts an infected individual (<span class="math inline">\(p\)</span>)</li>
+<li>the rate of contact between susceptible and infected individuals (<span class="math inline">\(c\)</span>)</li>
+<li>probability of successful transmission given contact (<span class="math inline">\(\nu\)</span>)</li>
 </ul>
+<p>Our infection process from <span class="math inline">\(S\)</span> to <span class="math inline">\(I\)</span> can be written as the product of these terms:</p>
+<p><span class="math display">\[ c \nu S p \]</span> the probability that a susceptible individual contacts an infected individual is equal to the current prevalence, therefore, we can use <span class="math inline">\(p = I/N\)</span>.</p>
+<p>The product of the rate of contact and the probability of successful transmission given contact gives the overall transmission rate, which we denote <span class="math inline">\(\beta\)</span>. Therefore, <span class="math inline">\(\beta = c \nu\)</span>.</p>
+<p>Our infection process can be written as:</p>
+<p><span class="math display">\[ \beta S I \]</span> The individuals leave <span class="math inline">\(S\)</span> at the same rate as they move to <span class="math inline">\(I\)</span>. Therefore we write the same terms in both <span class="math inline">\(dS/dt\)</span> and <span class="math inline">\(dI/dt\)</span> but with different signs to represent the loss of individuals from the susceptible class and the gain in individuals to the infected class.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{dS}{dt} &amp; = - \beta S I   \\
+\frac{dI}{dt} &amp;= \beta S I
+\end{aligned}
+\]</span></p>
+<p>Now we will use these equations to find the predicted proportions of individuals in each class. Recall that the to find the solution to a differential equation, we integrate.</p>
+<p>Notation: we have state variables <span class="math inline">\(S\)</span> and <span class="math inline">\(I\)</span>. We assume we know the numbers of individuals in <span class="math inline">\(S\)</span> and <span class="math inline">\(I\)</span> at time 0. If we assume there is one infected individual in a population of 100 people, we denote the initial state at time 0 as <span class="math inline">\(S(0) = 99\)</span> and <span class="math inline">\(I(0) = 1\)</span>.</p>
+<p>We have just one parameter, <span class="math inline">\(\beta\)</span>.</p>
+<p>Later in the course, we will learn how to perform numerical integration in R, for now we will focus on understanding what output we might expect given equations.</p>
+<p>In this case, what do you think the predicted numbers of susceptible individual and infected individual over time will look like?</p>
 </section>
-<section id="introduction-to-infectious-disease-modelling" class="level1">
-<h1>Introduction to Infectious Disease Modelling</h1>
-<p>Understanding the principles of developing a model will give you the tools to understand any model.</p>
-<p>These notes cover key introductory topics will help you to understand more complex models :</p>
-<ul>
-<li>understanding how to write equations for simple infectious disease models,</li>
-<li>adding additional processes e.g.&nbsp;loss of immunity and demographic processes,</li>
-<li>solving ODE models in R,</li>
-<li>how to find the equilibrium states of ODE model,</li>
-<li>and more.</li>
-</ul>
-<section id="r-essentials" class="level2">
-<h2 data-anchor-id="r-essentials">R Essentials</h2>
-<p>These notes cover the absolute essentials of using (base) R. Aimed at those who want to go from zero to using R within an afternoon!</p>
-
-
-</section>
-</section>
-</main></div>
+<section id="the-si-model-continued" class="level2">
+<h2 class="anchored" data-anchor-id="the-si-model-continued">The SI model continued</h2>
+<p>The plot below shows the predicted numbers over time. We see that the number of infected individuals increases over time. As the outbreak progresses, more susceptible individuals become infected.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="SI_files/figure-html/SI-1.png" class="img-fluid" width="672"></p>
 </div>
- <!-- /main -->
+</div>
+<p>Eventually all individuals become infected. This is because in our system of ODEs there is only one process and only one direction to that process : susceptible individuals becoming infected.</p>
+<p>One behaviour we can predict using the equation, is the speed at which the infection spreads. To explore this, we can look at the predicted numbers for different transmission rates <span class="math inline">\(\beta = 0.4\)</span>, <span class="math inline">\(\beta = 0.1\)</span> and <span class="math inline">\(\beta = 1.5\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="SI_files/figure-html/SI loop-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<p>The higher the value of <span class="math inline">\(\beta\)</span> the quicker the infection spreads. In the next lesson, we will look at extending our model to include the possibility of recovering from infection.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>How many compartments are in the SI model?</li>
+<li>How many parameters are in the SI model (not including total population size <span class="math inline">\(N\)</span>)?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>There are two compartments : susceptible and infected</li>
+<li>There is one parameter, the transmission route <span class="math inline">\(\beta\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -399,6 +461,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

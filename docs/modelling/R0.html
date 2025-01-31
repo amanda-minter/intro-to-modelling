@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Maths of Infectious Disease Modelling - About</title>
+<title>The Maths of Infectious Disease Modelling - Basic reproduction number</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,24 +20,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -58,8 +93,10 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -69,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">The Maths of Infectious Disease Modelling</span>
     </a>
   </div>
@@ -98,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">About</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../modelling/introduction.html">Introduction to Infectious Disease Modelling</a></li><li class="breadcrumb-item"><a href="../modelling/R0.html">Basic reproduction number</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -120,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
@@ -135,37 +172,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/differentiation.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/differentiation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differentiation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/ODE.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/ODE.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary differential equations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/numerical_integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/numerical_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/numerical_integration_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/numerical_integration_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical integration : Using deSolve</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Systems of ODE’s</span></a>
   </div>
 </li>
@@ -182,79 +219,79 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SI.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SI.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Susceptible - Infected model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIR.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIR.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SIR model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/R.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/freq_dens_dependence.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/freq_dens_dependence.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequency or density dependence</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/prop_numbers.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/prop_numbers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Modelling proportions or numbers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/R0.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/R0.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Basic reproduction number</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/NGM.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/NGM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Next Generation Matrix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIR_demography.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIR_demography.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Including demography</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIRS.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIRS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Test your understanding</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/sensitivity.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/sensitivity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sensitivity analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/events.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/events.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using events : vaccination</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/stochastic_discrete_time.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/stochastic_discrete_time.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BONUS : Stochastic models</span></a>
   </div>
 </li>
@@ -271,37 +308,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/getting_started.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/getting_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/extracting_information.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/extracting_information.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Extracting information</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/plots.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/plots.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basic plots</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/working_code.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/working_code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with code</span></a>
   </div>
 </li>
@@ -315,70 +352,174 @@ ul.task-list li input[type="checkbox"] {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
+   
   <ul>
-  <li><a href="#calculus-for-modelling" id="toc-calculus-for-modelling" class="nav-link active" data-scroll-target="#calculus-for-modelling">Calculus for Modelling</a></li>
-  <li><a href="#introduction-to-infectious-disease-modelling" id="toc-introduction-to-infectious-disease-modelling" class="nav-link" data-scroll-target="#introduction-to-infectious-disease-modelling">Introduction to Infectious Disease Modelling</a>
-  <ul class="collapse">
-  <li><a href="#r-essentials" id="toc-r-essentials" class="nav-link" data-scroll-target="#r-essentials">R Essentials</a></li>
-  </ul></li>
+  <li><a href="#the-sir-model" id="toc-the-sir-model" class="nav-link active" data-scroll-target="#the-sir-model">The SIR model</a></li>
+  <li><a href="#frequency-and-density-dependent-transmission" id="toc-frequency-and-density-dependent-transmission" class="nav-link" data-scroll-target="#frequency-and-density-dependent-transmission">Frequency and density dependent transmission</a></li>
+  <li><a href="#effective-reproduction-number" id="toc-effective-reproduction-number" class="nav-link" data-scroll-target="#effective-reproduction-number">Effective reproduction number</a></li>
+  <li><a href="#herd-immunity-threshold" id="toc-herd-immunity-threshold" class="nav-link" data-scroll-target="#herd-immunity-threshold">Herd immunity threshold</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<div class="quarto-about-trestles">
-  <div class="about-entity">
+<main class="content" id="quarto-document-content">
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">Basic reproduction number</h1>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    
+  
+    
   </div>
+  
+
 </header>
-    <div class="about-links">
-  <a href="https://www.linkedin.com/in/amanda-minter/" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">Linkedin</span>
-  </a>
-  <a href="https://github.com/amanda-minter" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-</div>
-  </div>
-  <div class="about-contents"><main class="content" id="quarto-document-content">
 
-<section id="calculus-for-modelling" class="level1">
-<h1>Calculus for Modelling</h1>
-<p>Have you just entered the world of infectious disease modelling? Are you ‘not a mathematician’? Understanding a few core topics of calculus will enable you to understand a wide range of mathematical models.</p>
-<p>These notes cover core calculus principles used in modelling, including:</p>
+<p>In this lesson we introduce the basic reproduction number (<span class="math inline">\(R_0\)</span>) an important concept in modelling epidemics.</p>
+<p><span class="math inline">\(R_0\)</span> is the average number of cases caused by one infectious individual in a entirely susceptible population. As <span class="math inline">\(R_0\)</span> is the average number of secondary cases, we have the following threshold:</p>
 <ul>
-<li>differentiation,</li>
-<li>integration (analytical and numerical),</li>
-<li>ordinary differential equations</li>
-<li>and more.</li>
+<li><span class="math inline">\(R_0 &gt; 1\)</span> then the first infectious case infects more than 1 secondary case, and hence the epidemic will ‘take off’</li>
+<li><span class="math inline">\(R_0 &lt; 1\)</span> the first infectious case infects less than 1 secondary case (on average) and so the epidemic dies out.</li>
 </ul>
-</section>
-<section id="introduction-to-infectious-disease-modelling" class="level1">
-<h1>Introduction to Infectious Disease Modelling</h1>
-<p>Understanding the principles of developing a model will give you the tools to understand any model.</p>
-<p>These notes cover key introductory topics will help you to understand more complex models :</p>
-<ul>
-<li>understanding how to write equations for simple infectious disease models,</li>
-<li>adding additional processes e.g.&nbsp;loss of immunity and demographic processes,</li>
-<li>solving ODE models in R,</li>
-<li>how to find the equilibrium states of ODE model,</li>
-<li>and more.</li>
-</ul>
-<section id="r-essentials" class="level2">
-<h2 data-anchor-id="r-essentials">R Essentials</h2>
-<p>These notes cover the absolute essentials of using (base) R. Aimed at those who want to go from zero to using R within an afternoon!</p>
-
-
-</section>
-</section>
-</main></div>
+<p>What about if <span class="math inline">\(R_0 = 1\)</span>? Then one infectious individual will go on to infect just one other, and so the disease will be <em>endemic</em>, i.e.&nbsp;the prevalence will remain at the same level.</p>
+<p>How do we find the expression for <span class="math inline">\(R_0\)</span>?</p>
+<p>For the SIR model, we can find an expression <span class="math inline">\(R_0\)</span> using the model assumptions. For complex models, there is advanced mathematical method that can be used to find an analytical expression for <span class="math inline">\(R_0\)</span> from a system of ODEs called the next generation matrix method.</p>
+<p>In this course we will focus on understanding how to interpret <span class="math inline">\(R_0\)</span> and its relationship with other epidemiological values.</p>
+<section id="the-sir-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-sir-model">The SIR model</h2>
+<p>If <span class="math inline">\(R_0\)</span> is the average number of cases on infectious individual infects, then our expression for <span class="math inline">\(R_0\)</span> will be a product of the rate at which the infectious individual infects susceptible multiplied by the duration of time in which they can infect.</p>
+<p><span class="math display">\[R_0 = \mbox{transmission rate} \times \mbox{duration of infection}\]</span></p>
+<p>Given we have just one infected person, the rate of transmission will be <span class="math inline">\(\beta S_0\)</span>, where <span class="math inline">\(S_0\)</span> is the initial proportion of susceptibles. But remember that we are looking at an entirely susceptible population so we can assume <span class="math inline">\(S_0=1\)</span>.</p>
+<p>The duration of infection will be the average amount of time an individual remains infectious. this is the inverse of the recovery rate. therefore the duration of infection is <span class="math inline">\(1/\gamma\)</span>.</p>
+<p>For SIR model, <span class="math inline">\(R0 = \frac{\beta}{\gamma}\)</span>.</p>
+<p>Let’s check that the numerical solutions behave as expected when we have <span class="math inline">\(R_0 &lt; 1\)</span> and <span class="math inline">\(R_0 &gt; 1\)</span>. In the plots below we use the following values for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span>,</p>
+<p><code>pars1 &lt;- c(beta = 0.6, gamma = 0.14) pars2 &lt;- c(beta = 0.6, gamma = 0.65)</code></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="R0_files/figure-html/SIR_R0s-1.png" class="img-fluid" width="960"></p>
 </div>
- <!-- /main -->
+</div>
+<p>When <span class="math inline">\(R_0 = 4.3\)</span>, the epidemic takes of and when <span class="math inline">\(R_0 = 0.9\)</span>, we do not have an epidemic.</p>
+</section>
+<section id="frequency-and-density-dependent-transmission" class="level2">
+<h2 class="anchored" data-anchor-id="frequency-and-density-dependent-transmission">Frequency and density dependent transmission</h2>
+<p>Does our expression for <span class="math inline">\(R_0\)</span> change when we use numbers instead of proportions? Recall that we write <span class="math inline">\(R_0\)</span> as:</p>
+<p><span class="math display">\[R_0 = \mbox{transmission rate} \times \mbox{duration of infection}\]</span></p>
+<p>In frequency dependent transmission, our transmission rate is just <span class="math inline">\(\beta\)</span> and in density dependent transmission we have <span class="math inline">\(\beta' S_0\)</span>, where <span class="math inline">\(S_0\)</span> is the initial number of susceptibles.</p>
+<p>We are looking at an entirely susceptible population, therefore <span class="math inline">\(N = X_0\)</span> and so we have:</p>
+<p><span class="math inline">\(\beta N\)</span> for density dependent transmission .</p>
+<p>Putting this all together we have,</p>
+<ul>
+<li>frequency dependent transmission <span class="math inline">\(R_0 = \frac{\beta}{\gamma}\)</span></li>
+<li>density dependent transmission <span class="math inline">\(R_0 = \frac{\beta' N}{\gamma}\)</span>.</li>
+</ul>
+<p>When using numbers, the expressions for <span class="math inline">\(R_0\)</span> are different for either frequency or density dependent transmission. For density dependent transmission, the population size (<span class="math inline">\(N\)</span>) is in the expression for <span class="math inline">\(R_0\)</span>. This means that for the same transmission rate and recovery rate, there will be cases when an epidemic will or won’t take off due to the size of the population.</p>
+</section>
+<section id="effective-reproduction-number" class="level2">
+<h2 class="anchored" data-anchor-id="effective-reproduction-number">Effective reproduction number</h2>
+<p>The basic reproduction ratio is a useful concept for understand whether an epidemic will occur when an infectious individual enters a completely susceptible population. But what about populations where there is existing immunity?</p>
+<p>The <em>effective</em> reproductive ratio (<span class="math inline">\(R_E\)</span>) is the average number an infected person goes on to infect in a population where not everyone is susceptible.</p>
+<p><span class="math inline">\(R_E = S R_0\)</span> where <span class="math inline">\(s\)</span> is the proportion of the population susceptible to infection. If <span class="math inline">\(R_E &lt; 1\)</span> the infection in the population will die out.</p>
+<p>The plots below show the predicted epidemic from an SIR model and the effective reproductive ratio over time. Note that the time at which <span class="math inline">\(R_E\)</span> becomes less than 1, is the time at which the epidemic reaches it’s peak and starts the proportion of infected starts to decrease.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="R0_files/figure-html/SIR_effective-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>The effective reproductive ratio is very useful for understanding the current risk of infection and can be used to calculate the ‘herd immunity’ threshold as we will see in the next lesson.</p>
+</section>
+<section id="herd-immunity-threshold" class="level2">
+<h2 class="anchored" data-anchor-id="herd-immunity-threshold">Herd immunity threshold</h2>
+<p>We are interested in the proportion of individuals that need to be immune so that the infection dies out in the population.</p>
+<p>Say that the proportion of population that is immune <span class="math inline">\(p\)</span>, how many need to be immune in order for infection to die out?</p>
+<p>If <span class="math inline">\(p\)</span> are immune, then <span class="math inline">\(1-p\)</span> are susceptible.</p>
+<p>We know that infection will die out if the effective reproductive ratio is less than 1 $R_E &lt; 1 $, where <span class="math inline">\(R_E = s R_0\)</span>. <span class="math display">\[
+\begin{aligned}
+R_E  &amp;&lt; 1   \\
+s R_0 &amp;&lt; 1 \mbox{   subsitute $R_E = s R_0$}\\
+(1-p) R_0 &amp;&lt; 1 \mbox{   subsitute $s = (1-p)$}\\
+(1-p) &amp;&lt; \frac{1}{R_0} \mbox{   rearrange}\\
+1- \frac{1}{R_0} &amp; &lt; p
+\end{aligned}
+\]</span> The proportion of the population that needs to be immune for an infection to die out is <span class="math inline">\(1-1/R_0\)</span>.</p>
+<p>For example,if <span class="math inline">\(R_0 = 2\)</span>, the proportion of the population that needs to be immune is <span class="math inline">\(1-1/2 = 1/2\)</span> of the. For higher <span class="math inline">\(R_0\)</span>, a higher proportion of the population needs to be immune. For <span class="math inline">\(R_0 = 5\)</span>, <span class="math inline">\(1-1/5 = 4/5\)</span>, so 80% of the population needs to immune.</p>
+<p>This is referred to as herd immunity threshold. The idea of herd immunity is that only a proportion of the population need to be immune, through vaccination for example, to protect those individuals who are not immune.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Assuming frequency dependent transmission in an SIR model, what is the value of <span class="math inline">\(R_0\)</span> if <span class="math inline">\(\beta = 0.12\)</span> and an average infectious period of 26 days (to 2 decimal places)?</li>
+<li>Assuming density dependent transmission in an SIR model, if <span class="math inline">\(R_0 = 1.75\)</span>, <span class="math inline">\(\gamma = 1/7\)</span> and the total population size is <span class="math inline">\(N =250\)</span> , what is the value of the transmission rate <span class="math inline">\(\beta’\)</span>?</li>
+<li>If <span class="math inline">\(R_0\)</span> = 1.25, what proportion of the population needs to be immune for the effective reproduction number to be less than 1?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.12</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>gamma <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">26</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>beta <span class="sc">/</span> gamma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.12</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">&lt;-</span> <span class="fl">1.75</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">259</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>gamma <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">7</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>R0 <span class="sc">*</span> gamma <span class="sc">/</span> N</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.000965251</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">&lt;-</span> <span class="fl">1.25</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> R0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -399,6 +540,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

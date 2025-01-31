@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Maths of Infectious Disease Modelling - About</title>
+<title>The Maths of Infectious Disease Modelling - SIR model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,21 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -58,8 +59,10 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -69,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">The Maths of Infectious Disease Modelling</span>
     </a>
   </div>
@@ -98,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">About</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../modelling/introduction.html">Introduction to Infectious Disease Modelling</a></li><li class="breadcrumb-item"><a href="../modelling/SIR.html">SIR model</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -120,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
@@ -135,37 +138,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/differentiation.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/differentiation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differentiation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/ODE.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/ODE.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary differential equations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/numerical_integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/numerical_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/numerical_integration_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/numerical_integration_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical integration : Using deSolve</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculus/systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../calculus/systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Systems of ODE’s</span></a>
   </div>
 </li>
@@ -182,79 +185,79 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SI.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SI.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Susceptible - Infected model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIR.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIR.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">SIR model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/R.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/freq_dens_dependence.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/freq_dens_dependence.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequency or density dependence</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/prop_numbers.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/prop_numbers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Modelling proportions or numbers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/R0.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/R0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basic reproduction number</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/NGM.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/NGM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Next Generation Matrix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIR_demography.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIR_demography.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Including demography</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/SIRS.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/SIRS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Test your understanding</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/sensitivity.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/sensitivity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sensitivity analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/events.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/events.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using events : vaccination</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modelling/stochastic_discrete_time.html" class="sidebar-item-text sidebar-link">
+  <a href="../modelling/stochastic_discrete_time.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BONUS : Stochastic models</span></a>
   </div>
 </li>
@@ -271,37 +274,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/getting_started.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/getting_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/extracting_information.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/extracting_information.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Extracting information</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/plots.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/plots.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basic plots</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/working_code.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/working_code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R_notes/functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../R_notes/functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with code</span></a>
   </div>
 </li>
@@ -313,72 +316,97 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-  <ul>
-  <li><a href="#calculus-for-modelling" id="toc-calculus-for-modelling" class="nav-link active" data-scroll-target="#calculus-for-modelling">Calculus for Modelling</a></li>
-  <li><a href="#introduction-to-infectious-disease-modelling" id="toc-introduction-to-infectious-disease-modelling" class="nav-link" data-scroll-target="#introduction-to-infectious-disease-modelling">Introduction to Infectious Disease Modelling</a>
-  <ul class="collapse">
-  <li><a href="#r-essentials" id="toc-r-essentials" class="nav-link" data-scroll-target="#r-essentials">R Essentials</a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
-<div class="quarto-about-trestles">
-  <div class="about-entity">
+<main class="content" id="quarto-document-content">
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">SIR model</h1>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    
+  
+    
   </div>
+  
+
 </header>
-    <div class="about-links">
-  <a href="https://www.linkedin.com/in/amanda-minter/" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">Linkedin</span>
-  </a>
-  <a href="https://github.com/amanda-minter" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
+
+<p>We will extend the SI model to also include the possibility of recovering from infection. We have the ‘S’ and ‘I’ compartment as before. In addition, individuals can recover from infection and move to the recovered compartment, ‘R’.</p>
+<p>We extend our flow diagram to include our extra compartment ‘R’ and a flow between ‘I’ and ‘R’, representing infected individuals recovering from infection.</p>
+<p><img src="SIR_words.png" class="img-fluid"></p>
+<p>Again, we can write down our assumptions in words. In this model, we have one additional equation representing the rate of change of the recovered population. The recovered individuals enter the recovered population at the same rate as individuals leaving the infected population. Therefore our recoveries will have a negative sign to indicate them leaving the infected population. <span class="math display">\[
+\begin{aligned}
+\mbox{susceptible population rate of change} &amp; = - \mbox{infections} \\
+\mbox{infected population rate of change} &amp;= + \mbox{infections} - \mbox{recoveries} \\
+\mbox{recovered population rate of change} &amp;= + \mbox{recoveries}
+\end{aligned}
+\]</span></p>
+<p>We have two different processes : infection and recovery.</p>
+<p>We introduce a new parameter, the recovery rate <span class="math inline">\(\gamma\)</span>. The recovery rate is the inverse of the average infectious period. If the average infectious period is 7 days, then the daily recovery rate is <span class="math inline">\(1/7\)</span>.</p>
+<p>The individuals recovering at each time step is the product the recovery rate, and the proportion of individuals in the <span class="math inline">\(I\)</span> compartment at that time : <span class="math inline">\(\gamma I\)</span>.</p>
+<p>For infections, we have <span class="math inline">\(\beta S I\)</span> leaving <span class="math inline">\(dS/dt\)</span> and entering <span class="math inline">\(dI/dt\)</span>.</p>
+<p>For recoveries, we have <span class="math inline">\(\gamma I\)</span> leaving <span class="math inline">\(dI/dt\)</span> and entering <span class="math inline">\(dR/dt\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{dS}{dt} &amp; = - \beta S I/N  \\
+\frac{dI}{dt} &amp;= \beta S I/N - \gamma I \\
+\frac{dR}{dt} &amp;=\gamma I \\
+\end{aligned}
+\]</span></p>
+<p>What do you think the solution to this system of ODEs will look like?</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="SIR_files/figure-html/SIR-1.png" class="img-fluid" width="672"></p>
 </div>
-  </div>
-  <div class="about-contents"><main class="content" id="quarto-document-content">
-
-<section id="calculus-for-modelling" class="level1">
-<h1>Calculus for Modelling</h1>
-<p>Have you just entered the world of infectious disease modelling? Are you ‘not a mathematician’? Understanding a few core topics of calculus will enable you to understand a wide range of mathematical models.</p>
-<p>These notes cover core calculus principles used in modelling, including:</p>
-<ul>
-<li>differentiation,</li>
-<li>integration (analytical and numerical),</li>
-<li>ordinary differential equations</li>
-<li>and more.</li>
-</ul>
-</section>
-<section id="introduction-to-infectious-disease-modelling" class="level1">
-<h1>Introduction to Infectious Disease Modelling</h1>
-<p>Understanding the principles of developing a model will give you the tools to understand any model.</p>
-<p>These notes cover key introductory topics will help you to understand more complex models :</p>
-<ul>
-<li>understanding how to write equations for simple infectious disease models,</li>
-<li>adding additional processes e.g.&nbsp;loss of immunity and demographic processes,</li>
-<li>solving ODE models in R,</li>
-<li>how to find the equilibrium states of ODE model,</li>
-<li>and more.</li>
-</ul>
-<section id="r-essentials" class="level2">
-<h2 data-anchor-id="r-essentials">R Essentials</h2>
-<p>These notes cover the absolute essentials of using (base) R. Aimed at those who want to go from zero to using R within an afternoon!</p>
-
-
-</section>
-</section>
-</main></div>
 </div>
- <!-- /main -->
+<p>The susceptible population slowly decreases as the number of infected individuals increases. As individuals can recover, there is a peak in the number of infected individuals – this is the epidemic peak, followed by an increase in the number of recovered individuals.</p>
+<p>In the next section, we will learn how to implement these models in R.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>How many compartments are in the SIR model?</li>
+<li>How many parameters are in the SIR model (not including total population size <span class="math inline">\(N\)</span>)?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>There are three compartments : susceptible, infected and recovered.</li>
+<li>There are two parameters, the transmission rate <span class="math inline">\(\beta\)</span> and the recovery rate <span class="math inline">\(\gamma\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -399,6 +427,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

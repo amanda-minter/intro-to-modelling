@@ -1,0 +1,305 @@
+---
+title: "Next Generation Matrix"
+---
+
+The Next Generation Matrix (NGM) method is used to find the analytical expression of $R_0$ based on a system of ODEs. To find $R_0$ using the NGM method, we will write out the transitions in and out of the infection states of our model in the form of two separate matrices:
+
++ the $F$ matrix, containing new infections 
++ the $V$ matrix, containing all other transitions,
+
+such that $J = F - V$ where $J$ is the Jacobian matrix for the disease states of the system of ODEs.
+
+Then the NGM matrix is $K = F V^{-1}$ and $R_0$ is the spectral radius of $K$.
+
+First we will cover some of the relevant calculus background. 
+
+## The Matrix 
+
+A matrix is a table of values. It consists of rows and columns. We refer to the numbers or values in the matrix as entries. 
+
+For example the matrix $A$ has two columns and three rows, 
+
+$$A = \begin{bmatrix}
+1 & 0.1\\
+4.4 & 6.2 \\
+5.0& 3.7 \\
+\end{bmatrix}.$$
+
+Matrices are used in mathematical modelling, specifically in the Next Generation Matrix method.
+
+### Matrix mulipcation
+
+Matrices of the same size can be multiplied together. If we have matrices $A$ and $B$,
+
+$$A = \begin{bmatrix}
+a & b\\
+c & d \\
+\end{bmatrix}$$ and 
+
+$$B = \begin{bmatrix}
+e & f\\
+g & h \\
+\end{bmatrix}.$$
+
+To multiply matrices $A$ and $B$ together, we multiply and add the entries as follows,
+
+$$AB = \begin{bmatrix}
+ae+bg & af+bh\\
+ce +dg& cf+dh \\
+\end{bmatrix}.$$
+
+
+### Matrix addition (and subtraction)
+
+To add (or subtract) two matrices of the same size, simply add (or subtract) entries. For example,
+
+$$A+B = \begin{bmatrix}
+a+e & b+f\\
+c+g& d+h \\
+\end{bmatrix}.$$
+
+$$A-B = \begin{bmatrix}
+a-e & b-f\\
+c-g& d-h \\
+\end{bmatrix}.$$
+
+### Matrix inverse
+
+Given a matrix $A$, 
+
+$$A = \begin{bmatrix}
+a & b\\
+c & d \\
+\end{bmatrix}$$
+
+the inverse, denoted $A^{-1}$ is,
+
+$$A^{-1} = \frac{1}{ad-bc}\begin{bmatrix}
+d & -b\\
+-c & a \\
+\end{bmatrix}.$$
+
+
+### Spectral radius
+
+The spectral radius of a matrix is the value of it's largest absolute eigenvalue. We can find the eigenvalues of a matrix by solving the equation,
+
+$$\det(K-\lambda I)=0$$
+
+where $I$ is the identity matrix and $\det$ stands for determinant. The determinant of a 2 x 2 matrix $A$ is, 
+
+$$\det(A) = ad-bc,$$
+
+with 
+
+$$A = \begin{bmatrix}
+a & b\\
+c & d \\
+\end{bmatrix}.$$
+
+The identity matrix $I$, is a matrix consisting of 1's along the diagonal and 0's elsewhere. For example, a 2 x 2 identity matrix is,
+
+$$I = \begin{bmatrix}
+1 & 0\\
+0 & 1 \\
+\end{bmatrix}.$$
+
+Note that for larger matrices, such as a 3 x 3 matrix, there are separate rules for finding the determinant, multiplication etc.
+
+Say we want to find the eigenvalues of the matrix $K$ with,
+
+$$K = \begin{bmatrix}
+4 & 8\\
+6 & 2 \\
+\end{bmatrix}.$$
+
+First we can find the matrix $K-\lambda I$ 
+
+$$ \begin{aligned}
+K-\lambda I &= \begin{bmatrix}
+4 & 8\\
+6 & 2 \\
+\end{bmatrix} -  \begin{bmatrix}
+\lambda & 0\\
+0 & \lambda \\
+\end{bmatrix}\\
+&=\begin{bmatrix}
+4 - \lambda & 8\\
+6 & 2-\lambda. \\
+\end{bmatrix}
+\end{aligned} $$
+
+The determinant of this matrix is,
+
+$$\begin{aligned}
+\det(K-\lambda I) & = (4 - \lambda)(2-\lambda) - 48 \\
+&= 8 - 4 \lambda - 2 \lambda + \lambda^2-48 \\
+&= \lambda^2-6\lambda -40\\
+&= (\lambda -10)(\lambda+4).
+\end{aligned} $$
+
+The equation $\det(K-\lambda I)$ is equal to 0 when $\lambda = 10$ or $\lambda = -4$. Therefore, our eigenvalues are $\lambda_1 = 10$ and $\lambda_2=-4$.
+
+The spectral radius is $\lambda_1 = 10$ (the largest absolute eigenvalue).
+
+## Jacobian matrix
+
+A Jacobian matrix for a system of ordinary differential equations (ODEs) consists of all the first order partial derivatives of the system. 
+
+For example, say we have the system of ODEs which represent a predator ($X$) and prey ($Y$) model of interaction, 
+
+$$ \begin{aligned}
+\frac{dX}{dt} & = \alpha X-\beta XY \\
+\frac{dY}{dt} &=  \delta XY -\gamma Y
+\end{aligned} $$
+
+If we add the following notation,
+
+$$ \begin{aligned}
+\frac{dX}{dt} & = f_1\\
+\frac{dY}{dt} &=  f_2
+\end{aligned} $$
+
+
+Then Jacobian matrix of the system of ODES is,
+
+$$J = \begin{bmatrix}
+\frac{\partial f_1}{ \partial X} & \frac{\partial f_1}{ \partial Y} \\
+\frac{\partial f_2}{ \partial X}  & \frac{\partial f_2}{ \partial Y} \\
+\end{bmatrix}$$
+
+which is, 
+ 
+$$J = \begin{bmatrix}
+\alpha -\beta Y & -\beta X  \\
+\delta Y  & \delta X -\gamma  \\
+\end{bmatrix}.$$
+
+
+
+## SEIR model with demography
+In this example, we have a Susceptible - Exposed - Infectious and Recovered model described by a system of ordinary differential equations,
+
+$$
+\begin{aligned}
+\frac{dS}{dt} & = \mu N- \beta S I/N -\mu S \\
+\frac{dE}{dt} &= \beta S I/N - \sigma E - \mu E\\
+\frac{dI}{dt} &= \sigma E - \gamma I - \mu I\\
+\frac{dR}{dt} &=\gamma I - \mu R\\
+\end{aligned}
+$$
+Individuals move from the $S$ to the $E$ state via frequency dependent transmission with transmission rate $\beta$. They then move from the $E$ to $I$ class at a rate $\sigma$, and can recover at rate $\gamma$. Individuals can suffer natural mortality at a rate $\mu$ in any state, and all individuals are born susceptible at the same rate $\mu$. 
+
+## Next Generation Matrix method
+
+We will separate out the different transitions into infection terms and all other transitions in and out of the infection states. In this model, the infection states are the exposed state $E$ and the infectious state $I$.
+
+If we first consider the exposed state ($E$) the infection terms are :
+
++ $\beta S I/N$
+
+and all other transitions are: 
+
++ $\sigma E$,
++ $\mu E$.
+
+In the infectious state ($I$) we have no infection terms, all new infections go to the exposed class only. The other transitions in $I$ are:
+
++ $\sigma E$,
++ $\gamma I$,
++ $\mu I$.
+
+We denote the new infection terms in $E$ and $I$ as $\mathcal{F_E}$ and $\mathcal{F_I}$ respectively:
+
++ $\mathcal{F_E} = \beta S I/N$
++ $\mathcal{F_I} = 0$ 
+
+Then we find the matrix $F$ by taking the partial derivatives of these terms as follows:
+
+$$F = \begin{bmatrix}
+\frac{\partial\mathcal{F_E}}{\partial E}& \frac{\partial \mathcal{F_E}}{\partial I} \\
+\frac{\partial \mathcal{F_I}}{\partial E}& \frac{\partial \mathcal{F_I}}{\partial I} \\
+\end{bmatrix}$$
+
+Evaluated at disease free equilibrium, $S_0=N$, $E_0=0$, $I_0=0$, $R_0=0$ the matrix $F$ becomes,
+
+$$F = \begin{bmatrix}
+0& \beta  \\
+0& 0\
+\end{bmatrix}.$$
+
+For the other transitions, we write the entries of the matrix $V$ as the rate of individuals into a state - the rate of individuals out of the state. 
+
+Therefore we denote other transitions out of $E$: 
+
++ $\mathcal{V_E} = \sigma E +\mu E,$ 
+
+and the other transitions transitions in $I$ as:
+
++  $\mathcal{V_I} = \gamma I +\mu I - \sigma E.$
+
+Then we we can write the matrix $V$:
+
+$$V = \begin{bmatrix}
+\frac{\partial \mathcal{V_E}}{\partial E}& \frac{\partial \mathcal{V_E}}{\partial I} \\
+\frac{\partial \mathcal{V_I}}{\partial E}& \frac{\partial \mathcal{V_I}}{\partial I} \\
+\end{bmatrix}$$
+
+which evaluated at the disease free equilibrium becomes:
+$$V = \begin{bmatrix}
+\sigma +\mu & 0\\
+-\sigma & \gamma +\mu\\
+\end{bmatrix}.$$
+
+The NGM is $K=F V^{-1}$, so we must find the inverse of $V$:
+
+$$\begin{aligned}
+V^{-1} & = \frac{1}{(\sigma+\mu)(\gamma+\mu)}\begin{bmatrix}
+{\gamma +\mu} & 0\\
+\sigma & {\sigma +\mu}
+\end{bmatrix} \\
+& = \begin{bmatrix}
+\frac{1}{\sigma +\mu} & 0\\
+\frac{\sigma}{(\sigma+\mu)(\gamma+\mu)} & \frac{1}{\gamma +\mu}\\
+\end{bmatrix}
+\end{aligned} $$
+
+Multiplying $F$ and $V^{-1}$ gives:
+
+$$FV^{-1} =\begin{bmatrix}
+0+\frac{\beta\sigma}{(\gamma+\mu)(\sigma+\mu)} & 0+\frac{\beta}{(\gamma+\mu)}\\
+0 +0& 0+0 \\
+\end{bmatrix}.$$
+
+Therefore the NGM is,
+$$K =\begin{bmatrix}
+\frac{\beta\sigma}{(\gamma+\mu)(\sigma+\mu)} & \frac{\beta}{(\gamma+\mu)}\\
+0 & 0 \\
+\end{bmatrix}.$$
+
+$R_0$ is the spectral radius of $K$ which we find by solving the equation $\det(K-\lambda I)=0$.
+
+Firstly, we find the matrix $K-\lambda I$,
+
+$$K-\lambda I =\begin{bmatrix}
+\frac{\beta\sigma}{(\gamma+\mu)(\sigma+\mu)} -\lambda & \frac{\beta}{(\gamma+\mu)}\\
+0 & -\lambda \\
+\end{bmatrix}.$$
+
+Then find the determinant of this matrix,
+$$ \det(K-\lambda I) = (\frac{\beta\sigma}{(\gamma+\mu)(\sigma+\mu)} -\lambda)(-\lambda)$$
+
+This equation equals 0 when
+$\lambda_1 = 0$ or $\lambda_2 = \frac{\beta\sigma}{(\gamma+\mu)(\sigma+\mu)}$. $\lambda_2$ will always be the largest eigenvalue, so the expression for $R_0$ for the SEIR model is:
+
+$$R_0 = \frac{\sigma\beta}{(\sigma+\mu)(\gamma+\mu)}. $$
+
+
+## Further reading 
+
+Diekmann O., Heesterbeek J. A. P. and Roberts M. G. 2010. The construction of next-generation matrices for compartmental epidemic models. J. R. Soc. Interface.7873–885.
+
+P. van den Driessche and J. Watmough (2001). Reproductive numbers and sub-threshold
+endemic equilibria for compartment models of disease transmission, Math. Biosci., 180:29–48.
+
+Majid Bani-Yaghoub, Raju Gautam, Zhisheng Shuai, P. van den Driessche & Renata Ivanek (2012) Reproduction numbers for infections with free-living pathogens growing in the environment, Journal of Biological Dynamics, 6:2, 923-940.

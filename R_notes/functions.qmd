@@ -1,0 +1,84 @@
+---
+title: "Working with code"
+---
+
+```{r setup3r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.path = "figure")
+```
+
+
+R has many ready to use functions to calculate statistics and to make plots. R packages contain further functions which have been written by contributors to perform more specialised analyses.
+
+In this lesson you will learn how to write your own function in R. 
+
+To write your own function you will need specify:
+
++ the function name
++ inputs
++ the calculation/operation
++ outputs
+
+The general syntax in R appears as follows:
+```{r outline, eval=FALSE}
+function_name <- function(inputs) {
+  calculation / operation
+  return(outputs)
+}
+```
+
+Let's start by writing a function which calculates the mean of a vector of numbers. In this case we have the following: 
+
++ the function name : `mean_fun`
++ inputs : one input, a vector of numbers `x`
++ the calculation/operation : find the sum of the numbers and divide by the length of the vector
++ outputs : the mean value
+
+To set up our function, we assign our function name `mean_fun` using 
+```{r basics, echo=TRUE}
+mean_fun <- function(x) {
+  n <- length(x)
+  result <- sum(x) / n
+  return(result)
+}
+```
+
+We run the above lines to load our function into our environment. Then we can use our new function with any vector `x`.
+```{r use_1, echo=TRUE}
+x <- c(4, 5, 6, 3, 3, 2, 2, 4, 5, 1)
+mean_fun(x)
+```
+
+
+We can extend our function to return more than one output. As well as returning the mean value, we also want to return `n`. Therefore we specify a list of outputs to return. 
+```{r basics_2, echo=TRUE}
+mean_fun <- function(x) {
+  n <- length(x)
+  result <- sum(x) / n
+  return(list(result, n))
+}
+```
+
+Now let's run it again, 
+
+```{r use_2, echo=TRUE}
+x <- c(4, 5, 6, 3, 3, 2, 2, 4, 5, 1)
+mean_fun(x)
+```
+
+We can extend this even further by naming the outputs in our list.
+```{r basics_3, echo=TRUE}
+mean_fun <- function(x) {
+  n <- length(x)
+  result <- sum(x) / n
+  return(list(mean_val = result, n = n))
+}
+```
+
+Then we assign the output to `my_result` and we can extract the mean using `mean_val` or the number of observations using `n`.
+```{r use_4, echo=TRUE}
+x <- c(4, 5, 6, 3, 3, 2, 2, 4, 5, 1)
+my_result <- mean_fun(x)
+my_result$mean_val
+my_result$n
+```
+
