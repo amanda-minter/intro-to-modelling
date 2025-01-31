@@ -1,7 +1,8 @@
 ---
-title: "About"
+title: ""
 about:
-  template: trestles
+  template: solana
+  id: hero-heading
   links:
     - icon: linkedin
       text: Linkedin
@@ -11,9 +12,18 @@ about:
       href: https://github.com/amanda-minter
 ---
 
+# New to infectious disease modelling? 
+
+Learning the core topics of calculus and mathematical modelling will help you understand any model. 
+
+These notes have been developed for learners with little to no mathematical background. The materials are split into three sections:
+
++ Calculus for Modelling
++ Introduction to Infectious Disease Modelling
++ R essentials (optional)
 
 
-# Calculus for Modelling
+## Calculus for Modelling
 
 Have you just entered the world of infectious disease modelling? Are you ‘not a mathematician’? Understanding a few core topics of calculus will enable you to understand a wide range of mathematical models.
 
@@ -24,7 +34,7 @@ These notes cover core calculus principles used in modelling, including:
 + ordinary differential equations
 + and more.
 
-# Introduction to Infectious Disease Modelling
+## Introduction to Infectious Disease Modelling
 
 Understanding the principles of developing a model will give you the tools to understand any model. 
 
@@ -36,7 +46,12 @@ These notes cover key introductory topics will help you to understand more compl
 + how to find the equilibrium states of ODE model,
 + and more.
 
-## R Essentials
+### R Essentials
 
 These notes cover the absolute essentials of using (base) R. Aimed at those who want to go from zero to using R within an afternoon!
 
+:::{#hero-heading}
+
+
+
+:::
