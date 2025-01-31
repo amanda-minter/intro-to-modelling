@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Maths of Infectious Disease Modelling - Ordinary differential equations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">The Maths of Infectious Disease Modelling</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/amanda-minter/intro-to-modelling">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/amanda-minter/intro-to-modelling/issues/new?template=Blank+issue">
+            Report an Error
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../calculus/differentiation.html">Calculus for Modelling</a></li><li class="breadcrumb-item"><a href="../calculus/ODE.html">Ordinary differential equations</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">New to infectious disease modelling?</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Calculus for Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/differentiation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Differentiation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/ODE.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Ordinary differential equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/numerical_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/numerical_integration_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical integration : Using deSolve</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calculus/systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Systems of ODE’s</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Introduction to Infectious Disease Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/SI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Susceptible - Infected model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/SIR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SIR model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/freq_dens_dependence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Frequency or density dependence</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/prop_numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modelling proportions or numbers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/R0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic reproduction number</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/NGM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Next Generation Matrix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/SIR_demography.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Including demography</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/SIRS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Test your understanding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/sensitivity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sensitivity analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/events.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using events : vaccination</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../modelling/stochastic_discrete_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BONUS : Stochastic models</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">R essentials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/getting_started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/extracting_information.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extracting information</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R packages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/working_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working with code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../R_notes/functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working with code</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#population-growth" id="toc-population-growth" class="nav-link" data-scroll-target="#population-growth">Population growth</a></li>
+  <li><a href="#population-growth-solution" id="toc-population-growth-solution" class="nav-link" data-scroll-target="#population-growth-solution">Population growth solution</a>
+  <ul class="collapse">
+  <li><a href="#plotting-the-solution" id="toc-plotting-the-solution" class="nav-link" data-scroll-target="#plotting-the-solution">Plotting the solution</a></li>
+  <li><a href="#equilibrium-states" id="toc-equilibrium-states" class="nav-link" data-scroll-target="#equilibrium-states">Equilibrium states</a></li>
+  <li><a href="#population-growth-with-carrying-capacity" id="toc-population-growth-with-carrying-capacity" class="nav-link" data-scroll-target="#population-growth-with-carrying-capacity">Population growth with carrying capacity</a></li>
+  <li><a href="#population-growth-model-equilibrium-states" id="toc-population-growth-model-equilibrium-states" class="nav-link" data-scroll-target="#population-growth-model-equilibrium-states">Population growth model equilibrium states</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Ordinary differential equations</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Ordinary differential equations can be used to model the rate of change of one variable with respect to another. They are often used in epidemic and ecological modelling as it allows us to specify the processes which affect the rate of change of populations.</p>
+<p>An ordinary differential equation (ODE) is an equation involving an unknown function of one variable and its derivatives.</p>
+<p>For example, <span class="math inline">\(\frac{dy}{dx} = 2x\)</span> is an ODE. We use the terminology “solving” the ODE, to find a “solution”. To solve the ODE <span class="math inline">\(\frac{dy}{dx} = 2x\)</span> we integrate to find the solution <span class="math inline">\(y=x^2 +c\)</span>.</p>
+<p>In the next lessons we will write on ODE to describe population growth, solve the ODE and plot the solution.</p>
+</section>
+<section id="population-growth" class="level2">
+<h2 class="anchored" data-anchor-id="population-growth">Population growth</h2>
+<p>We want to predict population size over time. The population changes according to two processes: births and deaths. The schematic below represents our model in the form of a flow diagram.</p>
+<p><img src="pop_words.png" class="img-fluid"></p>
+<p>First, we can write down our assumptions from our flow diagram using words: <span class="math display">\[
+\begin{aligned}
+\mbox{ population rate of change} &amp; = + \mbox{births} - \mbox{deaths} \\
+\end{aligned}
+\]</span> The population will increase with births and decrease with deaths.</p>
+<p>We denote the number of people in the population <span class="math inline">\(P\)</span>. We refer to <span class="math inline">\(P\)</span> the state variable of the ODE.</p>
+<p>Our model will have two parameters, the birth rate <span class="math inline">\(b\)</span> and the death rate <span class="math inline">\(m\)</span>. The birth rate represents the rate of new births per individual per time step. For example, if <span class="math inline">\(b=0.1\)</span> and the current population size is <span class="math inline">\(P = 10\)</span>, the new births are <span class="math inline">\(bP=1\)</span>.</p>
+<p>Our notation for the rate of change with respect to time is <span class="math inline">\(dP/dt\)</span>, therefore our ODE model is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{dP}{dt} &amp; = b P - m P
+\end{aligned}
+\]</span></p>
+<p>We can simplify this equation by writing the overall growth rate <span class="math inline">\(r\)</span> as the difference between the birth and death rate, <span class="math inline">\(r = b - m\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{dP}{dt} &amp; = r P
+\end{aligned}
+\]</span></p>
+<p>To find the solution to this ODE, we must integrate.</p>
+</section>
+<section id="population-growth-solution" class="level2">
+<h2 class="anchored" data-anchor-id="population-growth-solution">Population growth solution</h2>
+<p>To find the solution to the population growth ODE we will use the separation of variables method.</p>
+<ol type="1">
+<li>Separate the variables.</li>
+</ol>
+<p>We move all of the terms including <span class="math inline">\(P\)</span> to the left hand side of the equation, and all the terms including <span class="math inline">\(t\)</span> to the right hand side of the equation. To this we multiply by <span class="math inline">\(dt\)</span>:</p>
+<p><span class="math display">\[ dP = r P dt\]</span> and then divide by <span class="math inline">\(P\)</span>,</p>
+<p><span class="math display">\[\frac{1}{P} dP  = r dt\]</span> 2. Integrate both sides</p>
+<p><span class="math display">\[
+\begin{align}
+\int \frac{1}{P} dP &amp; = \int r dt \\
+\ln(P) &amp; =  r t + c
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(c\)</span> is the constant from both sides.</p>
+<ol start="3" type="1">
+<li>Simplify the solution</li>
+</ol>
+<p>Then take the exponent of both sides and separate out the constant.</p>
+<p><span class="math display">\[
+\begin{align}
+P &amp; =  \exp(r t + c) \\
+&amp; =  \exp(r t) \exp(c) \\
+\end{align}
+\]</span></p>
+<p>To find a value for the constant, we substitute <span class="math inline">\(t=0\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(0)  &amp;=  \exp(0) \exp(c) \\
+&amp;= \exp(c)
+\end{aligned}
+\]</span> Therefore we can write the constant <span class="math inline">\(\exp(c)\)</span> with the value of the state variable at time 0,</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(t)  &amp;=  \exp(r t) P(0) \\
+&amp;= P(0) e^{rt}.
+\end{aligned}
+\]</span></p>
+<p>The population size at time <span class="math inline">\(t\)</span>, can be found using the above equation given an initial value of the population at time 0 <span class="math inline">\(P(0)\)</span> and the growth rate <span class="math inline">\(r\)</span>.</p>
+<section id="plotting-the-solution" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-the-solution">Plotting the solution</h3>
+<p>We have our solution <span class="math inline">\(P(t)= P(0) e^{rt}\)</span>. To plot the solution we need the following,</p>
+<ul>
+<li>the initial state <span class="math inline">\(P(0)\)</span> is the value of our state variable at time 0,</li>
+<li>the growth rate of parameter <span class="math inline">\(r\)</span>,</li>
+<li>the time we wish to find the solution for <span class="math inline">\(t\)</span>.</li>
+</ul>
+<p>We assume the population size starts at 1 so we have <span class="math inline">\(P(0)=1\)</span>, and grows at rate <span class="math inline">\(r = 0.2\)</span>. In R we assign these values as follows.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the initial condition P(0) =1</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>P_0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set growth rate r = 0.2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will find the solution for 50 time points.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the time t which we want to plot the solution</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the population at time t using the solution to the ODE</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>P_t <span class="ot">&lt;-</span> P_0 <span class="sc">*</span> <span class="fu">exp</span>(r <span class="sc">*</span> times)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the solution</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(times, P_t, <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="st">"Population size"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ODE_files/figure-html/pop_sol-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We will see later in the course that we cannot always find an equation for the solution to the ODE (this is called the analytical solution), instead we have to perform numerical integration to find the solution.</p>
+</section>
+<section id="equilibrium-states" class="level3">
+<h3 class="anchored" data-anchor-id="equilibrium-states">Equilibrium states</h3>
+<p>Equilibrium states (or points) occur when a system is at equilibrium i.e.&nbsp;there are no changes to the state variable values. An equilibrium state for a differential equation is a solution where the value of the state variables does not change over time.</p>
+<p>Recall when the derivative of a line is 0, the gradient is 0 - which means that the line is flat. Given that differential equations represent the rate of change of a state variable, when a differential equation is 0 - there is no change in the state variable, the gradient of the solution of the ODE is 0.</p>
+<p>In epidemic and ecological modelling we are interested if our ODE or ODEs have equilibrium states, what values they take and what conditions lead to the model reaching equilibrium. In the next lesson we will consider an extension to the population growth model which as an equilibrium state.</p>
+</section>
+<section id="population-growth-with-carrying-capacity" class="level3">
+<h3 class="anchored" data-anchor-id="population-growth-with-carrying-capacity">Population growth with carrying capacity</h3>
+<p>In our previous example, we formulated an ODE to describe population growth. In the solution, the population grew exponentially. A more realistic model of population growth will include some kind of limit to the population size.</p>
+<p>The ODE below describes a population growth with a ‘carrying capacity’ <span class="math inline">\(K\)</span>. <span class="math display">\[
+\begin{aligned}
+\frac{dP}{dt} &amp; = r P \frac{(K-P)}{K}.
+\end{aligned}
+\]</span> To further understand this equation, consider the following questions:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+If <span class="math inline">\(K&gt;P\)</span>, is <span class="math inline">\(\frac{dP}{dt}\)</span> positive or negative?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\frac{dP}{dt}\)</span> is positive, the population size is growing with respect to time because the population has not reached its carrying capacity</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+If <span class="math inline">\(K&lt;P\)</span>, is <span class="math inline">\(\frac{dP}{dt}\)</span> positive or negative?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\frac{dP}{dt}\)</span> is negative, the population size is decreasing with respect to time as the population size is above its carrying capacity</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+If <span class="math inline">\(K=P\)</span>, what does <span class="math inline">\(\frac{dP}{dt}\)</span> equal?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\frac{dP}{dt}=0\)</span>, the population is at is carrying capacity and does not grow in size or decrease</p>
+</div>
+</div>
+</div>
+<p>To explore the dynamics of this model, we need to find the solution to the ODE.</p>
+</section>
+<section id="population-growth-model-equilibrium-states" class="level3">
+<h3 class="anchored" data-anchor-id="population-growth-model-equilibrium-states">Population growth model equilibrium states</h3>
+<p>We can find a solution by hand (an analytical solution), but it’s more challenging than the population growth equation without carrying capacity. We won’t focus on the steps of finding the solution here, instead we will focus on the behaviour of the model.</p>
+<p>The solution to the ODE is,</p>
+<p><span class="math display">\[
+P(t) = \frac{K}{1+Ae^{-rt}} \quad \mbox{where } A=\frac{K-P_0}{P_0}
+\]</span> where <span class="math inline">\(P_0 = P(0)\)</span>, the initial population size at time <span class="math inline">\(t=0\)</span>.</p>
+<p>We can plot the solution for given initial condition <span class="math inline">\(P(0)\)</span>, growth rate <span class="math inline">\(r\)</span>, and carrying capacity <span class="math inline">\(K\)</span>.</p>
+<p>Before we do this, what do you think the equilibrium points will be? In other words, when will <span class="math inline">\(\frac{dP}{dt}=0\)</span>?</p>
+<p>Let’s return to the ODE equation,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{dP}{dt} &amp; = r P \frac{(K-P)}{K}
+\end{aligned}
+\]</span> The gradient is 0 when this expression is equal to 0 i.e.&nbsp;<span class="math inline">\(\frac{dP}{dt}=0\)</span>. For what values of the state variables and parameters is this expression equal to?</p>
+<p>Let’s first expand the terms on the right hand side of the equation: <span class="math display">\[
+\begin{aligned}
+\frac{dP}{dt} &amp; = r P \frac{(K-P)}{K} \\
+&amp;=r P - \frac{r P^2}{K}
+\end{aligned}
+\]</span></p>
+<p>If we set the left hand side of the equation to 0, we have:</p>
+<p><span class="math display">\[
+\begin{aligned}
+0&amp;=r P - \frac{r P^2}{K}  \\
+r P K &amp;= r P^2
+\end{aligned}
+\]</span> When does the left hand side of the equation equal the right hand side of the equation?</p>
+<ul>
+<li><span class="math inline">\(P=0\)</span> the population size is 0,</li>
+<li><span class="math inline">\(P=K\)</span> the population at carrying capacity.</li>
+</ul>
+<p>Let’s consider each of these in turn.</p>
+<p>The first case is when the population size is 0, we replicate this by setting the initial state to 0.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the initial condition P(0)=0</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>P_0 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set growth rate r=0.2</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the carrying capacity K  = 50</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the time t which we want to plot the solution</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the population at time t using the solution to the ODE</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> (K <span class="sc">-</span> P_0) <span class="sc">/</span> P_0</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>P_t <span class="ot">&lt;-</span> K <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>r <span class="sc">*</span> times))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the solution</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(times, P_t, <span class="at">xlab =</span> <span class="st">"time"</span>, <span class="at">ylab =</span> <span class="st">"Population size"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ODE_files/figure-html/pop_carry_solP-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>When <span class="math inline">\(P=0\)</span>,here specified as <span class="math inline">\(P(0)=0\)</span> the population remains at 0.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the initial condition P(0)=1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>P_0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set growth rate r = 0.2</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the carrying capacity K=50</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the time t which we want to plot the solution</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the population at time t using the solution to the ODE</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> (K <span class="sc">-</span> P_0) <span class="sc">/</span> P_0</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>P_t <span class="ot">&lt;-</span> K <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>r <span class="sc">*</span> times))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the solution</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(times, P_t, <span class="at">xlab =</span> <span class="st">"time"</span>, <span class="at">ylab =</span> <span class="st">"Population size"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ODE_files/figure-html/pop_carry_solK-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>With <span class="math inline">\(P(0)=1\)</span> and <span class="math inline">\(r=0.2\)</span>, we see that the gradient of the solution is 0 when <span class="math inline">\(P=K\)</span> i.e.&nbsp;when the population is at carrying capacity.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
