@@ -46,7 +46,7 @@ These notes cover key introductory topics will help you to understand more compl
 + how to find the equilibrium states of ODE model,
 + and more.
 
-### R Essentials
+## R Essentials
 
 These notes cover the absolute essentials of using (base) R. Aimed at those who want to go from zero to using R within an afternoon!
 
