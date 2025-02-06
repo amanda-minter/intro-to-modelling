@@ -3,7 +3,8 @@ title: "Basic plots"
 ---
 
 ```{r setup3r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.path = "figure")
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.path = "figure",
+                      fig.align = "center")
 ```
 
 R can be used for data analysis and manipulating data. In both of these cases, we want to be able to plot our data.

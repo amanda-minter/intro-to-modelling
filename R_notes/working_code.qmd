@@ -11,7 +11,7 @@ When we write our code it is useful to write descriptions about what each line i
 We can add comments to our R script using the `#` symbol.
 
 ```{r commenting, echo = TRUE}
-# load in the dataset women
+# Load in the dataset women
 data("women")
 ```
 
@@ -24,15 +24,16 @@ Anything written after the `#` symbol will not be evaluated by R as code.  This 
 
 Let's go through one of our previous examples and add comments to our code. 
 ```{r commenting3, echo = TRUE}
-# load in the dataset women
+# Load in the dataset women
 data("women")
 
-# find the mean weight
+# Find the mean weight
 mean_weight <- mean(women$weight)
-# find which women had a weight more than the mean
+
+# Find which women had a weight more than the mean
 which_rows <- which(women$weight > mean_weight)
 
-# find corresponding weight and height for these rows
+# Find corresponding weight and height for these rows
 women[which_rows, ]
 ```
 
@@ -71,13 +72,13 @@ Now our code runs without errors.
 ## Exercise
 Can you fix the following code so that its runs without errors?
 ```{r ex_debug, echo=TRUE, error = TRUE}
-# load in data set chicken weights
+# Load in data set chicken weights
 data("chickwts")
 
-# what column names of the data set
+# What column names of the data set
 colname(chickwt)
 
-# make a box plot of the weight against feed
+# Make a box plot of the weight against feed
 boxplot(weight ~ fed, data = chickwts)
 ```
 
@@ -91,11 +92,13 @@ boxplot(weight ~ fed, data = chickwts)
 + The column name is ‘feed’ not ‘fed’
 
 ```{r ex_debug_sol, echo=TRUE, error = TRUE}
-# load in data set chicken weights
+# Load in data set chicken weights
 data("chickwts")
-# what column names of the data set
+
+# What column names of the data set
 colnames(chickwts)
-# make a box plot of the weight against feed
+
+# Make a box plot of the weight against feed
 boxplot(weight ~ feed, data = chickwts)
 ```
 

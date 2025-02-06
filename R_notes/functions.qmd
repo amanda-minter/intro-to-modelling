@@ -1,5 +1,5 @@
 ---
-title: "Working with code"
+title: "Writing functions"
 ---
 
 ```{r setup3r, include=FALSE}
