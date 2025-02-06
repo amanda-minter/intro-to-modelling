@@ -7,7 +7,6 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA, dev = "png",
                       fig.width = 5, fig.height = 5)
 ```
 
-## Introduction
 In our previous examples we have been able to find an analytical solution to the population growth ODEs (with and without carrying capacity). This means we have been able to write down an equation for the solution. However in some cases, it can be very difficult or impossible to find an analytical solution to an ODE. In these cases we use methods to find a numerical approximation of the analytical solution.
 
 In the next lessons we will learn the principles of finding a numerical approximation to ODEs. 
@@ -19,7 +18,7 @@ $$\frac{dy}{dt}= f'(t)$$
 
 then integrating $f'(t)$ gave us $f(t)$:
 
-$$\int f'(t) dt = f(t)$$.
+$$\int f'(t) dt = f(t).$$
 
 For the population growth case, we have $\frac{dP}{dt}= r P$ and we are interested in finding $P(t) = f(t)$.
 
@@ -75,7 +74,7 @@ n_max <- t_max / delta_t
 # Set up empty data frame to store time and value of P
 solution <- data.frame(time = 0, P = P_0)
 
-# for n time steps
+# For n time steps
 for (n in 1:n_max){
   # Find the current time
   time <- solution$time[n]
@@ -112,7 +111,7 @@ n_max <- t_max / delta_t
 # Set up empty data frame to store time and value of P
 solution <- data.frame(time = 0, P = P_0)
 
-# for n_max time steps
+# For n_max time steps
 for (n in 1:n_max){
   # Find the current time
   time <- solution$time[n]
@@ -176,7 +175,7 @@ In our Euler example, we used the expression for the derivative $\frac{dP}{dt}$,
 
 For our population growth example, the RK4 method is as follows,
 
-$P_{n+1} = P_n + \frac{1}{6} h (k_1 + 2k_2 + 2k_3 + k_4)$
+$$P_{n+1} = P_n + \frac{1}{6} h (k_1 + 2k_2 + 2k_3 + k_4)$$
 
 where $h = \Delta t$ our step size and $\frac{dP}{dt}= f'(t,P)$, 
 

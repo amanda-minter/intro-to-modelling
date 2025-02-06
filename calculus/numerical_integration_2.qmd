@@ -176,7 +176,7 @@ population_growth_K <- function(time, state_var, pars) {
   K <- pars["K"]
   # The differential equations
   dP <- r * P * ((K - P) / K)
-  # Return the solved equations as a list
+  # Return the equations as a list
   sol <- list(c(dP))
   return(sol)
 }

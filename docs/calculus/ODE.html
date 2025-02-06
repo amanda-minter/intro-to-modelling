@@ -354,8 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#population-growth" id="toc-population-growth" class="nav-link" data-scroll-target="#population-growth">Population growth</a></li>
+  <li><a href="#population-growth" id="toc-population-growth" class="nav-link active" data-scroll-target="#population-growth">Population growth</a></li>
   <li><a href="#population-growth-solution" id="toc-population-growth-solution" class="nav-link" data-scroll-target="#population-growth-solution">Population growth solution</a>
   <ul class="collapse">
   <li><a href="#plotting-the-solution" id="toc-plotting-the-solution" class="nav-link" data-scroll-target="#plotting-the-solution">Plotting the solution</a></li>
@@ -386,17 +385,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Ordinary differential equations can be used to model the rate of change of one variable with respect to another. They are often used in epidemic and ecological modelling as it allows us to specify the processes which affect the rate of change of populations.</p>
 <p>An ordinary differential equation (ODE) is an equation involving an unknown function of one variable and its derivatives.</p>
 <p>For example, <span class="math inline">\(\frac{dy}{dx} = 2x\)</span> is an ODE. We use the terminology “solving” the ODE, to find a “solution”. To solve the ODE <span class="math inline">\(\frac{dy}{dx} = 2x\)</span> we integrate to find the solution <span class="math inline">\(y=x^2 +c\)</span>.</p>
 <p>In the next lessons we will write on ODE to describe population growth, solve the ODE and plot the solution.</p>
-</section>
 <section id="population-growth" class="level2">
 <h2 class="anchored" data-anchor-id="population-growth">Population growth</h2>
 <p>We want to predict population size over time. The population changes according to two processes: births and deaths. The schematic below represents our model in the form of a flow diagram.</p>
-<p><img src="pop_words.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pop_words.png" class="img-fluid figure-img" style="width:30.0%"></p>
+</figure>
+</div>
 <p>First, we can write down our assumptions from our flow diagram using words: <span class="math display">\[
 \begin{aligned}
 \mbox{ population rate of change} &amp; = + \mbox{births} - \mbox{deaths} \\
@@ -484,7 +484,7 @@ P(t)  &amp;=  \exp(r t) P(0) \\
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the solution</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(times, P_t, <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="st">"Population size"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ODE_files/figure-html/pop_sol-1.png" class="img-fluid" width="672"></p>
+<p><img src="ODE_files/figure-html/pop_sol-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>We will see later in the course that we cannot always find an equation for the solution to the ODE (this is called the analytical solution), instead we have to perform numerical integration to find the solution.</p>
@@ -602,7 +602,7 @@ r P K &amp;= r P^2
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the solution</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(times, P_t, <span class="at">xlab =</span> <span class="st">"time"</span>, <span class="at">ylab =</span> <span class="st">"Population size"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ODE_files/figure-html/pop_carry_solP-1.png" class="img-fluid" width="672"></p>
+<p><img src="ODE_files/figure-html/pop_carry_solP-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>When <span class="math inline">\(P=0\)</span>,here specified as <span class="math inline">\(P(0)=0\)</span> the population remains at 0.</p>
@@ -621,7 +621,7 @@ r P K &amp;= r P^2
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the solution</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(times, P_t, <span class="at">xlab =</span> <span class="st">"time"</span>, <span class="at">ylab =</span> <span class="st">"Population size"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ODE_files/figure-html/pop_carry_solK-1.png" class="img-fluid" width="672"></p>
+<p><img src="ODE_files/figure-html/pop_carry_solK-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>With <span class="math inline">\(P(0)=1\)</span> and <span class="math inline">\(r=0.2\)</span>, we see that the gradient of the solution is 0 when <span class="math inline">\(P=K\)</span> i.e.&nbsp;when the population is at carrying capacity.</p>

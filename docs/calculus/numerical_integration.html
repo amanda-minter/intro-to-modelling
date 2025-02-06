@@ -354,8 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#the-euler-method" id="toc-the-euler-method" class="nav-link" data-scroll-target="#the-euler-method">The Euler method</a></li>
+  <li><a href="#the-euler-method" id="toc-the-euler-method" class="nav-link active" data-scroll-target="#the-euler-method">The Euler method</a></li>
   <li><a href="#the-euler-method-in-r" id="toc-the-euler-method-in-r" class="nav-link" data-scroll-target="#the-euler-method-in-r">The Euler method in R</a></li>
   <li><a href="#comparison-to-analytical-solution" id="toc-comparison-to-analytical-solution" class="nav-link" data-scroll-target="#comparison-to-analytical-solution">Comparison to analytical solution</a></li>
   <li><a href="#rungekutta-methods" id="toc-rungekutta-methods" class="nav-link" data-scroll-target="#rungekutta-methods">Runge–Kutta methods</a></li>
@@ -382,17 +381,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>In our previous examples we have been able to find an analytical solution to the population growth ODEs (with and without carrying capacity). This means we have been able to write down an equation for the solution. However in some cases, it can be very difficult or impossible to find an analytical solution to an ODE. In these cases we use methods to find a numerical approximation of the analytical solution.</p>
 <p>In the next lessons we will learn the principles of finding a numerical approximation to ODEs.</p>
-</section>
 <section id="the-euler-method" class="level2">
 <h2 class="anchored" data-anchor-id="the-euler-method">The Euler method</h2>
 <p>First we will revisit some notation of derivatives and integrals. We denoted the derivative of a function as:</p>
 <p><span class="math display">\[\frac{dy}{dt}= f'(t)\]</span></p>
 <p>then integrating <span class="math inline">\(f'(t)\)</span> gave us <span class="math inline">\(f(t)\)</span>:</p>
-<p><span class="math display">\[\int f'(t) dt = f(t)\]</span>.</p>
+<p><span class="math display">\[\int f'(t) dt = f(t).\]</span></p>
 <p>For the population growth case, we have <span class="math inline">\(\frac{dP}{dt}= r P\)</span> and we are interested in finding <span class="math inline">\(P(t) = f(t)\)</span>.</p>
 <p>We start with the definition of a derivative for our ODE <span class="math inline">\(\frac{dP}{dt}\)</span>:</p>
 <p><span class="math display">\[\frac{dP}{dt} =\mbox{lim}_{\Delta t\to 0} \frac{f(t+\Delta t)-f(t)}{\Delta t}\]</span></p>
@@ -426,7 +422,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up empty data frame to store time and value of P</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>solution <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">time =</span> <span class="dv">0</span>, <span class="at">P =</span> P_0)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># for n time steps</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># For n time steps</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_max){</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Find the current time</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  time <span class="ot">&lt;-</span> solution<span class="sc">$</span>time[n]</span>
@@ -470,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The Runge–Kutta method, also known as RK4, is a method for finding a numerical solution of an integral.</p>
 <p>In our Euler example, we used the expression for the derivative <span class="math inline">\(\frac{dP}{dt}\)</span>, to calculate the slope of our line at each time step. RK4 uses a similar principle, but instead of calculating one slope, RK4 calculates four different slopes (hence the name!).</p>
 <p>For our population growth example, the RK4 method is as follows,</p>
-<p><span class="math inline">\(P_{n+1} = P_n + \frac{1}{6} h (k_1 + 2k_2 + 2k_3 + k_4)\)</span></p>
+<p><span class="math display">\[P_{n+1} = P_n + \frac{1}{6} h (k_1 + 2k_2 + 2k_3 + k_4)\]</span></p>
 <p>where <span class="math inline">\(h = \Delta t\)</span> our step size and <span class="math inline">\(\frac{dP}{dt}= f'(t,P)\)</span>,</p>
 <p><span class="math display">\[
 \begin{aligned}

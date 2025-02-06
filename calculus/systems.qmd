@@ -51,7 +51,7 @@ As the prey population declines form predation, the predator population will gro
 
 For example, if 5 prey are eaten, that does not mean that 5 predators are then born, the rate of births due to predation occurs at a different rate but due to the same number of contacts. Therefore we introduce another parameter $\delta$ which represents the growth rate of the predator population as a result of predation.Therefore our growth (births) via predation can be written as:
 
-$\delta X Y.$
+$$\delta X Y.$$
 
 The predator population also declines from deaths from natural causes, which we assume occurs at a rate of $\gamma$.
 
@@ -86,7 +86,7 @@ predator_prey <- function(time, state_var, pars) {
   # The differential equations
   dX <- alpha * X - beta * X * Y
   dY <- delta * X * Y - gamma * Y
-  # Return the solved equations as a list
+  # Return the equations as a list
   sol <- list(c(dX, dY))
   return(sol)
 }

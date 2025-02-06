@@ -401,7 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[\beta X Y.\]</span></p>
 <p>As the prey population declines form predation, the predator population will grow. The number of predators which are added (via births) will depend on the number of contacts between the prey and predators and the rate of contact as before, but now the rate of addition will not be the same as the rate of removal i.e.&nbsp;we cannot assume that the same number of prey that are removed are also added to the predators.</p>
 <p>For example, if 5 prey are eaten, that does not mean that 5 predators are then born, the rate of births due to predation occurs at a different rate but due to the same number of contacts. Therefore we introduce another parameter <span class="math inline">\(\delta\)</span> which represents the growth rate of the predator population as a result of predation.Therefore our growth (births) via predation can be written as:</p>
-<p><span class="math inline">\(\delta X Y.\)</span></p>
+<p><span class="math display">\[\delta X Y.\]</span></p>
 <p>The predator population also declines from deaths from natural causes, which we assume occurs at a rate of <span class="math inline">\(\gamma\)</span>.</p>
 <p>We can now write down our system of ODEs representing the rate of change of he prey and predator populations:</p>
 <p><span class="math display">\[
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The differential equations</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  dX <span class="ot">&lt;-</span> alpha <span class="sc">*</span> X <span class="sc">-</span> beta <span class="sc">*</span> X <span class="sc">*</span> Y</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  dY <span class="ot">&lt;-</span> delta <span class="sc">*</span> X <span class="sc">*</span> Y <span class="sc">-</span> gamma <span class="sc">*</span> Y</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the solved equations as a list</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the equations as a list</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  sol <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dX, dY))</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sol)</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

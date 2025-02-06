@@ -6,8 +6,6 @@ title: "Integration"
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
 ```
 
-## Introduction
-
 Integration is used to find the anti-derivative. Previously, from a function $y=f(x)$ we found the derivative $\frac{dy}{dx}$ using differentiation. Now, starting from the derivative $\frac{dy}{dx}$ we will find $y=f(x)$ using integration.  
 
 Let's start by introducing two pieces of new notation: 

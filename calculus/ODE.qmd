@@ -3,10 +3,10 @@ title: "Ordinary differential equations"
 ---
 
 ```{r setupo, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment = NA)
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.width = 5,
+                      fig.height = 5)
 ```
 
-## Introduction
 Ordinary differential equations can be used to model the rate of change of one variable with respect to another. They are often used in epidemic and ecological modelling as it allows us to specify the processes which affect the rate of change of populations.
 
 An ordinary differential equation (ODE) is an equation involving an unknown function of one variable and its derivatives.
@@ -18,7 +18,7 @@ In the next lessons we will write on ODE to describe population growth, solve th
 ## Population growth
 We want to predict population size over time. The population changes according to two processes: births and deaths. The schematic below represents our model in the form of a flow diagram.
 
-![](pop_words.png)
+![](pop_words.png){fig-align="center" width=30%}
 
 First, we can write down our assumptions from our flow diagram using words:
 $$
