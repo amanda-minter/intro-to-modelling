@@ -340,7 +340,11 @@ ul.task-list li input[type="checkbox"] {
 
 <p>We will extend the SI model to also include the possibility of recovering from infection. We have the ‘S’ and ‘I’ compartment as before. In addition, individuals can recover from infection and move to the recovered compartment, ‘R’.</p>
 <p>We extend our flow diagram to include our extra compartment ‘R’ and a flow between ‘I’ and ‘R’, representing infected individuals recovering from infection.</p>
-<p><img src="SIR_words.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SIR_words.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 <p>Again, we can write down our assumptions in words. In this model, we have one additional equation representing the rate of change of the recovered population. The recovered individuals enter the recovered population at the same rate as individuals leaving the infected population. Therefore our recoveries will have a negative sign to indicate them leaving the infected population. <span class="math display">\[
 \begin{aligned}
 \mbox{susceptible population rate of change} &amp; = - \mbox{infections} \\
@@ -361,9 +365,13 @@ ul.task-list li input[type="checkbox"] {
 \end{aligned}
 \]</span></p>
 <p>What do you think the solution to this system of ODEs will look like?</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="SIR_files/figure-html/SIR-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SIR_files/figure-html/SIR-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The susceptible population slowly decreases as the number of infected individuals increases. As individuals can recover, there is a peak in the number of infected individuals – this is the epidemic peak, followed by an increase in the number of recovered individuals.</p>

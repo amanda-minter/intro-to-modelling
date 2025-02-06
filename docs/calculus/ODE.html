@@ -467,14 +467,14 @@ P(t)  &amp;=  \exp(r t) P(0) \\
 <li>the time we wish to find the solution for <span class="math inline">\(t\)</span>.</li>
 </ul>
 <p>We assume the population size starts at 1 so we have <span class="math inline">\(P(0)=1\)</span>, and grows at rate <span class="math inline">\(r = 0.2\)</span>. In R we assign these values as follows.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the initial condition P(0) =1</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>P_0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set growth rate r = 0.2</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will find the solution for 50 time points.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the time t which we want to plot the solution</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -484,7 +484,11 @@ P(t)  &amp;=  \exp(r t) P(0) \\
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the solution</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(times, P_t, <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="st">"Population size"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ODE_files/figure-html/pop_sol-1.png" class="img-fluid" width="480"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ODE_files/figure-html/pop_sol-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We will see later in the course that we cannot always find an equation for the solution to the ODE (this is called the analytical solution), instead we have to perform numerical integration to find the solution.</p>
@@ -587,7 +591,7 @@ r P K &amp;= r P^2
 </ul>
 <p>Let’s consider each of these in turn.</p>
 <p>The first case is when the population size is 0, we replicate this by setting the initial state to 0.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the initial condition P(0)=0</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>P_0 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set growth rate r=0.2</span></span>
@@ -602,11 +606,15 @@ r P K &amp;= r P^2
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the solution</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(times, P_t, <span class="at">xlab =</span> <span class="st">"time"</span>, <span class="at">ylab =</span> <span class="st">"Population size"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ODE_files/figure-html/pop_carry_solP-1.png" class="img-fluid" width="480"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ODE_files/figure-html/pop_carry_solP-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>When <span class="math inline">\(P=0\)</span>,here specified as <span class="math inline">\(P(0)=0\)</span> the population remains at 0.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the initial condition P(0)=1</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>P_0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set growth rate r = 0.2</span></span>
@@ -621,7 +629,11 @@ r P K &amp;= r P^2
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the solution</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(times, P_t, <span class="at">xlab =</span> <span class="st">"time"</span>, <span class="at">ylab =</span> <span class="st">"Population size"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ODE_files/figure-html/pop_carry_solK-1.png" class="img-fluid" width="480"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ODE_files/figure-html/pop_carry_solK-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>With <span class="math inline">\(P(0)=1\)</span> and <span class="math inline">\(r=0.2\)</span>, we see that the gradient of the solution is 0 when <span class="math inline">\(P=K\)</span> i.e.&nbsp;when the population is at carrying capacity.</p>

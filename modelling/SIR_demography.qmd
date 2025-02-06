@@ -5,6 +5,7 @@ title: Including demography
 ```{r setup_demo, include=FALSE}
 library(deSolve)
 library(rootSolve)
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
 ```
 
 
@@ -61,7 +62,7 @@ SIR_demography_model <- function(time, state_var, pars) {
   dS <- mu * N - beta * S * I / N - mu * S
   dI <- beta * S * I / N - gamma * I - mu * I
   dR <- gamma * I - mu * R
-  # Return the solved equations as a list
+  # Return the equations as a list
   sol <- list(c(dS, dI, dR))
   return(sol)
 }

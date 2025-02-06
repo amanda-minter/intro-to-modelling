@@ -387,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \end{aligned}
 \]</span> Assume that we have a population of 100 people, and there is one infected individual. To explore the infection dynamics through time we want to find the solution using initial conditions <span class="math inline">\(S(0)=99\)</span> and <span class="math inline">\(I(0)=1\)</span>. In the population growth example, we found the analytical solution by integrating. In this case, we will also integrate but instead of finding an equation for the solution, we will find a numerical solution.</p>
 <p>To find the numerical solution, we will use ODE solvers in the R package<code>deSolve</code>. The first step is to install and load the package.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"deSolve"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(deSolve)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -406,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>and the function must return a list with first element a vector of the derivative values.</p>
 <p>The function below describes the system of ODEs for the SI model. It takes inputs <code>time</code>, <code>state_var</code> and <code>pars</code> and returns our derivatives values <code>dS</code> and <code>dI</code> in a vector.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>SI_model <span class="ot">&lt;-</span> <span class="cf">function</span>(time, state_var, pars) {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract state variables</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">&lt;-</span> state_var[<span class="st">"S"</span>]</span>
@@ -417,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The differential equations</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> <span class="sc">-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the derivatives as a result</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the equations as a list</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  sol <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI))</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sol)</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -425,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The fourth input is the vector of parameter values. In the SI model, we only have one parameter values, <span class="math inline">\(\beta\)</span>. Therefore our vector of parameters values is : <code>pars &lt;- c(beta = 0.4)</code></p>
 <p>The fifth input is the method to be used to find the numerical solution. We will specify our method as <code>rk4</code>, this is Runge-Kutta 4th order integration method. This method finds a numerical approximation to solution.</p>
 <p>We then can use the function <code>ode</code> with our inputs to find the solution to our system of ODEs:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>solution <span class="ot">&lt;-</span> <span class="fu">ode</span>(<span class="at">y =</span> state_var, <span class="at">times =</span> times, <span class="at">func =</span> SI_model, <span class="at">parms =</span> pars,</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">method =</span> rk4)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(solution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -446,7 +446,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>number of infected individuals.</li>
 </ul>
 <p>To look at the solution over time, we can plot the solution using the <code>plot</code> function in R. We convert our solution to a data.frame so we can extract column names for plotting.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>solution <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(solution)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(solution<span class="sc">$</span>time, solution<span class="sc">$</span>S, <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
@@ -455,7 +455,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="dv">60</span>, <span class="fu">c</span>(<span class="st">"Susceptible"</span>, <span class="st">"Infected"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>),</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="R_files/figure-html/plot-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="R_files/figure-html/plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="sir-model" class="level2">
@@ -492,7 +496,7 @@ SIR model code
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>SIR_model <span class="ot">&lt;-</span> <span class="cf">function</span>(time, state_var, pars){</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract state variables</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">&lt;-</span> state_var[<span class="st">"S"</span>]</span>
@@ -506,7 +510,7 @@ SIR model code
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> <span class="sc">-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I<span class="sc">/</span>N</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I<span class="sc">/</span>N <span class="sc">-</span> gamma <span class="sc">*</span> I</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  dR <span class="ot">&lt;-</span> gamma <span class="sc">*</span> I</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the solved equations as a list</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the equations as a list</span></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  sol <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI, dR))</span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sol)</span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -530,7 +534,11 @@ SIR model code
 <span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">30</span>,<span class="dv">60</span>, <span class="fu">c</span>(<span class="st">"Susceptible"</span>, <span class="st">"Infected"</span>, <span class="st">"Recovered"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"darkgreen"</span>), </span>
 <span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="R_files/figure-html/SIR-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="R_files/figure-html/SIR-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -569,7 +577,7 @@ Solution
 <ol type="1">
 <li>How many susceptible, infectious and recovered individuals (to 2 decimal places) are there at day 10?</li>
 </ol>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(solution[<span class="fu">which</span>(solution<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">10</span>),],<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   time     S     I     R
@@ -579,7 +587,7 @@ Solution
 <ol start="2" type="1">
 <li>How many susceptible, infectious, and recovered individuals (to 2 decimal places) are there at day 50?</li>
 </ol>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(solution[<span class="fu">which</span>(solution<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">50</span>),],<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   time    S    I     R
@@ -589,7 +597,7 @@ Solution
 <ol start="3" type="1">
 <li>At what day is the epidemic peak (when there are the maximum number of infectious individuals)?</li>
 </ol>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>solution<span class="sc">$</span>time[<span class="fu">which.max</span>(solution<span class="sc">$</span>I)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 13</code></pre>

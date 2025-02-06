@@ -1,13 +1,13 @@
 ---
 title: "Sensitivity analysis"
-output: html_document
-date: "2024-08-16"
 ---
 
-```{r setup, include=FALSE}
+```{r setupsens, include=FALSE}
 library(deSolve)
 library(sensitivity)
 library(FME)
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
+
 ```
 
 Deciding which parameters to use, what ranges and what method of sensitivity analysis depends on the question at hand. Here we introduce the concept of sensitivity analysis of infectious disease models. Using the SEIR model, we perform sensitivity analysis of model parameters on their effect on model outcomes epidemic peak time and size using visualisations and PRCC sensitivity analysis.
@@ -51,7 +51,7 @@ SEIR_model <- function(time, state_var, pars) {
   dI <- sigma * E - gamma * I
   dR <- gamma * I
 
-  # Return the  equations as a list
+  # Return the equations as a list
   sol <- list(c(dS, dE, dI, dR))
   return(sol)
 }

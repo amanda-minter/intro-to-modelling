@@ -392,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \end{aligned}
 \]</span> where <span class="math inline">\(S\)</span>, <span class="math inline">\(I\)</span> and <span class="math inline">\(R\)</span> denote the number of susceptible, infectious and recovered individuals respectively. The total population size is <span class="math inline">\(N = S + I + R\)</span>.The model parameters are the transmission rate <span class="math inline">\(\beta\)</span> and the recovery rate <span class="math inline">\(\gamma\)</span>.</p>
 <p>We assume a daily transmission rate of <span class="math inline">\(\beta = 1.2\)</span>, and a recovery rate of <span class="math inline">\(\gamma = 1/10\)</span>. The model solution for given one infected individual in a population of 100 is shown below.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>SIR_model <span class="ot">&lt;-</span> <span class="cf">function</span>(time, state_var, pars) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract state variables</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">&lt;-</span> state_var[<span class="st">"S"</span>]</span>
@@ -406,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> <span class="sc">-</span>beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N <span class="sc">-</span> gamma <span class="sc">*</span> I</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  dR <span class="ot">&lt;-</span> gamma <span class="sc">*</span> I</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the derivatives as a list</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the equations as a list</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  sol <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI, dR))</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sol)</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -431,9 +431,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>solution <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> state_var, <span class="at">times =</span> times, <span class="at">func =</span> SIR_model,</span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>                              <span class="at">parms =</span> pars, <span class="at">method =</span> rk4))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="events_files/figure-html/SIR_plot-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="events_files/figure-html/SIR_plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The epidemic peak occurs at time 6.5 with 71.04 infected individuals.</p>
@@ -443,7 +447,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="events">Events</h2>
 <p>First, we must write a function that describes what happens if an event is triggered. The inputs must be the current time of the integration, the current estimated of the state variables and the parameter vector.</p>
 <p>In this example, an event is vaccination. We implement a simplified vaccination process where a proportion <span class="math inline">\(p\)</span> of the susceptible population is vaccinated and immediately moved to the recovered class.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>event_vaccinate <span class="ot">&lt;-</span> <span class="cf">function</span>(times, state_var, parms) {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract needed state variables</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">&lt;-</span> state_var[<span class="st">"S"</span>]</span>
@@ -464,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="example" class="level2">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
 <p>Assuming that 20% of the susceptible population is vaccinated on day 1, 5, 7, 10 the we find the solution as follows:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">beta =</span> <span class="fl">1.2</span>, <span class="at">gamma =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">10</span>, <span class="at">p =</span> <span class="fl">0.2</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>solution <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> state_var, <span class="at">times =</span> times, <span class="at">func =</span> SIR_model,</span>
@@ -472,16 +476,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">events =</span> <span class="fu">list</span>(<span class="at">func =</span> event_vaccinate,</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">time =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="events_files/figure-html/events_plot-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="events_files/figure-html/events_plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The epidemic peak now occurs at time 7 with 48.24 infected individuals.</p>
 <p>Let’s compare this to a much higher proportion of vaccination and set <span class="math inline">\(p=0.8\)</span>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="events_files/figure-html/events_highp-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="events_files/figure-html/events_highp-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The epidemic peak now occurs at time 5 with 4.64 infected individuals.</p>

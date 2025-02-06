@@ -413,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="understanding-code" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-code">Understanding code</h2>
 <p>We have also been given the following R code to find the numerical solution, but when we try to run the code, it doesn’t work. Can you fix the code and use the output to answer the questions in the next quiz?</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>SIRS_demography_model <span class="ot">&lt;-</span> <span class="cf">function</span>(time, state_var, pars) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract state variables</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">&lt;-</span> state_var[<span class="st">"S"</span>]</span>
@@ -428,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> mu <span class="sc">*</span> N <span class="sc">+</span> omega <span class="sc">*</span> R <span class="sc">-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N <span class="sc">-</span> mu <span class="sc">*</span> S</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N <span class="sc">-</span> gamma <span class="sc">*</span> I <span class="sc">-</span> mu <span class="sc">*</span> I</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  dR <span class="ot">&lt;-</span> gamma <span class="sc">*</span> I <span class="sc">-</span> mu <span class="sc">*</span> R <span class="sc">-</span> omega <span class="sc">*</span> R</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the solved equations as a list</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the equations as a list</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  sol <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI, dR))</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sol)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -465,7 +465,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The name of the parameter <span class="math inline">\(\gamma\)</span> did not match in the the parameter vector <code>pars</code> and the model function. It was spelled <code>gama</code> in <code>pars</code>. We change this is <code>gamma</code>.</li>
 </ul>
 <p>The fixed code is :</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>SIRS_demography_model <span class="ot">&lt;-</span> <span class="cf">function</span>(time, state_var, pars) {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract state variables</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">&lt;-</span> state_var[<span class="st">"S"</span>]</span>
@@ -481,7 +481,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> mu <span class="sc">*</span> N <span class="sc">+</span> omega <span class="sc">*</span> R <span class="sc">-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N <span class="sc">-</span> mu <span class="sc">*</span> S</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N <span class="sc">-</span> gamma <span class="sc">*</span> I <span class="sc">-</span> mu <span class="sc">*</span> I</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  dR <span class="ot">&lt;-</span> gamma <span class="sc">*</span> I <span class="sc">-</span> mu <span class="sc">*</span> R <span class="sc">-</span> omega <span class="sc">*</span> R</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the solved equations as a list</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the equations as a list</span></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  sol <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI, dR))</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sol)</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -509,12 +509,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"darkgreen"</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="SIRS_files/figure-html/SIRS-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SIRS_files/figure-html/SIRS-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In the SIRS model solution, after the epidemic peak, the recovered individuals lose their immunity and become susceptible again, resulting in a secondary peak followed by endemic infection in the population.</p>
 <p>We can find the endemic equilibrium values using <code>runsteady</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>equilibrium_state <span class="ot">&lt;-</span> <span class="fu">runsteady</span>(<span class="at">y =</span> state_var,</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">func =</span> SIRS_demography_model, <span class="at">parms =</span> pars)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(equilibrium_state<span class="sc">$</span>y, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -548,7 +552,7 @@ Solution
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">omega =</span> <span class="fl">0.05</span>, <span class="at">beta =</span> <span class="fl">0.6</span>, <span class="at">gamma =</span> <span class="fl">0.14</span>, <span class="at">mu =</span> <span class="fl">0.01</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>equilibrium_state <span class="ot">&lt;-</span> <span class="fu">runsteady</span>(<span class="at">y =</span> state_var,</span>

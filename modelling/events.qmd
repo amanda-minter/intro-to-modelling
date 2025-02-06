@@ -5,6 +5,7 @@ title: "Using events : vaccination"
 
 ```{r setupevents, include=FALSE}
 library(deSolve)
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
 ```
 
 The 'events' function can be used to implement changes in the model at fixed times. In this example, we illustrate how to add vaccination at fixed time points in an SIR model.
@@ -38,7 +39,7 @@ SIR_model <- function(time, state_var, pars) {
   dS <- -beta * S * I / N
   dI <- beta * S * I / N - gamma * I
   dR <- gamma * I
-  # Return the derivatives as a list
+  # Return the equations as a list
   sol <- list(c(dS, dI, dR))
   return(sol)
 }

@@ -17,7 +17,7 @@ $$ c \nu S p = \beta S I/N $$
 + the number of susceptible individuals ($S$)
 + probability that a susceptible contacts an infected individual ($p = I/N$)
 + rate of contact ($c$)
-+ probability of successful transmission given contact ($\nu$)
++ probability of successful transmission given contact ($\nu$).
 
 We assumed that the rate of contact $c$ *does not* increase with population size. This is know as frequency dependent transmission. The rate of infectious contacts increases with the *frequency of infected individuals* in the population. 
 
@@ -53,7 +53,7 @@ SIR_numbers_dens_model <- function(time, state_var, pars) {
   dS <- -(beta * S * I)
   dI <- (beta * S * I) - gamma * I
   dR <- gamma * I
-  # Return the derivatives as a list
+  # Return the equations as a list
   sol <- list(c(dS, dI, dR))
   return(sol)
 }
@@ -71,7 +71,7 @@ SIR_numbers_freq_model <- function(time, state_var, pars) {
   dS <- -beta * S * I / N
   dI <- beta * S * I / N - gamma * I
   dR <- gamma * I
-  # Return the derivatives as a list
+  # Return the equations as a list
   sol <- list(c(dS, dI, dR))
   return(sol)
 }

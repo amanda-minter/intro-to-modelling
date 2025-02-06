@@ -4,6 +4,7 @@ title: "Using R"
 
 ```{r setup_r, include=FALSE}
 library(deSolve)
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
 ```
 
 
@@ -61,7 +62,7 @@ SI_model <- function(time, state_var, pars) {
   # The differential equations
   dS <- - beta * S * I / N
   dI <- beta * S * I / N
-  # Return the derivatives as a result
+  # Return the equations as a list
   sol <- list(c(dS, dI))
   return(sol)
 }
@@ -155,7 +156,7 @@ SIR_model <- function(time, state_var, pars){
   dS <- - beta * S * I/N
   dI <- beta * S * I/N - gamma * I
   dR <- gamma * I
-  # Return the solved equations as a list
+  # Return the equations as a list
   sol <- list(c(dS, dI, dR))
   return(sol)
 }

@@ -1,6 +1,9 @@
 ---
 title: "The Susceptible - Infected model"
 ---
+```{r setupsi, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
+```
 
 As modellers, we specify the rate of change of our variable of interest based on our assumptions about biological processes. The key to understanding epidemic models is to understand the assumptions being made about infection spread, and the impact of these assumptions on the predicted dynamics over time.
 
@@ -10,7 +13,7 @@ The first model we will introduce is the Susceptible – Infected or SI model. I
 The schematic below represents our model in the form of a flow diagram. There are two compartments: ‘S’ for susceptible and ‘I’ for infected, and there is one process whereby individuals can move from ‘S’ to ‘I’, infection:
 
 
-![](SI_words.png)
+![](SI_words.png){fig-align="center" width=60%}
 
 To predict the flow between the two compartments, we will use ordinary differential equations (ODEs). Here we are interested in modelling the rate of change of the number of individuals in each compartment with respect to time.
 
@@ -81,7 +84,7 @@ susceptible_infected <- function(time, state_var, pars) {
   # The differential equations
   dS <- - beta * S * I / N
   dI <- beta * S * I / N
-  # Return the solved equations as a list
+  # Return the equations as a list
   sol <- list(c(dS, dI))
   return(sol)
 }

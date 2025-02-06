@@ -388,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>the number of susceptible individuals (<span class="math inline">\(S\)</span>)</li>
 <li>probability that a susceptible contacts an infected individual (<span class="math inline">\(p = I/N\)</span>)</li>
 <li>rate of contact (<span class="math inline">\(c\)</span>)</li>
-<li>probability of successful transmission given contact (<span class="math inline">\(\nu\)</span>)</li>
+<li>probability of successful transmission given contact (<span class="math inline">\(\nu\)</span>).</li>
 </ul>
 <p>We assumed that the rate of contact <span class="math inline">\(c\)</span> <em>does not</em> increase with population size. This is know as frequency dependent transmission. The rate of infectious contacts increases with the <em>frequency of infected individuals</em> in the population.</p>
 <p>Instead, we may wish to assume that the rate of contact increases linearly with total population size <span class="math inline">\(N\)</span>. This is commonly referred to as <em>density dependence</em>. In this case we would have <span class="math inline">\(c = k N\)</span>, where <span class="math inline">\(k\)</span> is some constant.</p>
@@ -417,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> <span class="sc">-</span>(beta <span class="sc">*</span> S <span class="sc">*</span> I)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> (beta <span class="sc">*</span> S <span class="sc">*</span> I) <span class="sc">-</span> gamma <span class="sc">*</span> I</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  dR <span class="ot">&lt;-</span> gamma <span class="sc">*</span> I</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the derivatives as a list</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the equations as a list</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  sol <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI, dR))</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sol)</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -435,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> <span class="sc">-</span>beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N <span class="sc">-</span> gamma <span class="sc">*</span> I</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  dR <span class="ot">&lt;-</span> gamma <span class="sc">*</span> I</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the derivatives as a list</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the equations as a list</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  sol <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI, dR))</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sol)</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>}</span>

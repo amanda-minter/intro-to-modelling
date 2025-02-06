@@ -2,12 +2,15 @@
 title: "SIR model"
 ---
 
+```{r setupsir, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
+```
 
 We will extend the SI model to also include the possibility of recovering from infection. We have the 'S' and 'I' compartment as before. In addition, individuals can recover from infection and move to the recovered compartment, 'R'. 
 
 We extend our flow diagram to include our extra compartment 'R' and a flow between 'I' and 'R', representing infected individuals recovering from infection.
 
-![](SIR_words.png)
+![](SIR_words.png){fig-align="center" width=80%}
 
 Again, we can write down our assumptions in words. In this model, we have one additional equation representing the rate of change of the recovered population. The recovered individuals enter the recovered population at the same rate as individuals leaving the infected population. Therefore our recoveries will have a negative sign to indicate them leaving the infected population.
 $$
@@ -54,7 +57,7 @@ SIR_model <- function(time, state_var, pars){
   dS <- - beta * S * I / N
   dI <- beta * S * I / N - gamma * I
   dR <- gamma * I
-  # Return the solved equations as a list
+  # Return the equations as a list
   sol <- list(c(dS, dI, dR))
   return(sol)
 }

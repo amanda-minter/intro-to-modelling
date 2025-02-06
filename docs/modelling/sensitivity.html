@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-08-16">
 
 <title>The Maths of Infectious Disease Modelling - Sensitivity analysis</title>
 <style>
@@ -376,12 +375,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 16, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -406,9 +399,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Define the outcome that we will measure the effect of.</li>
 </ol>
 <p>The SEIR model output gives us the number of individuals in each state <span class="math inline">\(S\)</span>, <span class="math inline">\(E\)</span>, <span class="math inline">\(I\)</span> and <span class="math inline">\(R\)</span> through time.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="sensitivity_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="480"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sensitivity_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Using this model output we will extract two outcomes of interest:</p>
@@ -453,17 +450,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="exploring-relationships">Exploring relationships</h2>
 <p>We will include the latent period (<span class="math inline">\(1/\sigma\)</span>), the infectious period (<span class="math inline">\(1/\gamma\)</span>) and the transmission rate (<span class="math inline">\(\beta\)</span>) in our sensitivity analysis.</p>
 <p>Firstly, we will explore the visual changes in our model output when we change parameter values. The first plot below shows how the SEIR model solution changes when we change the value of the latent period (<span class="math inline">\(1/\sigma\)</span>). As latent period increases, epidemic peak time is pushed forward in time. The epidemic peak size is higher for shorter latent periods.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="sensitivity_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="1152"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sensitivity_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The plot below shows the epidemic peak size and time for different values of the latent period, infectious period and transmission rate respectively. The circle indicates the fixed value. From this plot we can look at the direction of the relationship and how much the outcome changes. We see that the epidemic peak time increases for longer latent periods, whereas the peak size decreases.</p>
 <p>The direction of the relationship between the model outcomes and the infectious period/transmission rate are the same. The epidemic peak time decreases for longer infectious periods and higher transmission rates. Whereas the epidemic peak size increase for longer infectious periods and higher transmission rates.</p>
 <p>The plots can be used to infer whether the relationship between the outcome and the parameter is monotonic, which is a requirement for the formal sensitivity analysis in the next section.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="sensitivity_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="576"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sensitivity_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We can also use these figures to see which parameter range has the widest range in model outcomes. The biggest range in epidemic peak time is for our given range of transmission rate. Whereas the biggest range in epidemic peak size is for our range of infectious period.</p>
@@ -489,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>In R, we need the R package <code>{sensitivity}</code>. The full R script to perform the PRCC sensitivity analysis is attached as an exercise file to this lesson.</p>
 <p>The results of the sensitivity analysis shown in the table below. The PRCC align with our visual check. The plots with a negative relationship resulted in a negative coefficient, and the plots with a positive relationship resulted in a positive coefficient.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the ranges of parameters</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>par_ranges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">min =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="fl">0.4</span>),</span>

@@ -402,7 +402,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \end{aligned}
 \]</span></p>
 <p>What will the solution to this system of ODEs look like?</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>SIR_demography_model <span class="ot">&lt;-</span> <span class="cf">function</span>(time, state_var, pars) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract state variables</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">&lt;-</span> state_var[<span class="st">"S"</span>]</span>
@@ -417,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> mu <span class="sc">*</span> N <span class="sc">-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N <span class="sc">-</span> mu <span class="sc">*</span> S</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> beta <span class="sc">*</span> S <span class="sc">*</span> I <span class="sc">/</span> N <span class="sc">-</span> gamma <span class="sc">*</span> I <span class="sc">-</span> mu <span class="sc">*</span> I</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  dR <span class="ot">&lt;-</span> gamma <span class="sc">*</span> I <span class="sc">-</span> mu <span class="sc">*</span> R</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the solved equations as a list</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the equations as a list</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  sol <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI, dR))</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sol)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -445,7 +445,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"darkgreen"</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="SIR_demography_files/figure-html/SIR_demography-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SIR_demography_files/figure-html/SIR_demography-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We see there is an epidemic peak followed by an endemic state. In the SIR model with no births and deaths, we saw an epidemic peak which eventually died out. In the SIR model with births and deaths, new susceptible individuals are constantly being added to our population through birth. This addition of new susceptible results in infection becoming endemic.</p>
@@ -469,7 +473,7 @@ R^* &amp;= N(R_0 - 1)\frac{\gamma}{\beta}
 \]</span></p>
 <p>where <span class="math inline">\(R_0 = \beta/(\gamma+\mu)\)</span>.</p>
 <p>Using these equations and our parameter values, we can calculate the number of individuals in each disease state at equilibrium.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">beta =</span> <span class="fl">0.1</span>, <span class="at">gamma =</span> <span class="fl">0.014</span>, <span class="at">mu =</span> <span class="fl">0.01</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> pars[[<span class="st">"beta"</span>]]</span>
@@ -490,7 +494,7 @@ R^* &amp;= N(R_0 - 1)\frac{\gamma}{\beta}
 <p>We have found the value of the endemic prevalence without having to find the numerical solution.</p>
 <p>However, this is a simple example and you may not always have an analytical expression of the equilibrium state, in this case, how can we find the endemic prevalence?</p>
 <p>We can look at our numerical solution after the the epidemic peak. The R function <code>tail</code> will give us the last 6 rows of the solution data.frame.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(solution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     time  S        I        R
@@ -505,7 +509,7 @@ R^* &amp;= N(R_0 - 1)\frac{\gamma}{\beta}
 <p>The values of our numerical solution are close to the analytical solution but not exact. We could try finding the solution for a longer time period, but we don’t know how long do we have to run our model to find endemic equilibrium.</p>
 <p>We can use the R function <code>runsteady()</code>in the R package <code>rootSolve</code> to find a numerical approximation to the equilibrium state. This function takes the inputs of the value of the initial state variables, the R function for the ODE equations and the parameters.</p>
 <p>Then we can extract the value of the equilibrium estimate <code>y</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rootSolve)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>equilibrium <span class="ot">&lt;-</span> <span class="fu">runsteady</span>(<span class="at">y =</span> state_var, <span class="at">func =</span> SIR_demography_model,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">parms =</span> pars)</span>
@@ -521,9 +525,13 @@ R^* &amp;= N(R_0 - 1)\frac{\gamma}{\beta}
 <h2 class="anchored" data-anchor-id="importance-of-demographic-processes">Importance of demographic processes</h2>
 <p>We have shown that including births and deaths in an SIR model framework results in endemic infection. We have also shown that the birth and death rate <span class="math inline">\(\mu\)</span> are in the expression for <span class="math inline">\(R_0\)</span> and the endemic equilibrium.</p>
 <p>Let’s investigate the importance of including demographic processes by looking at the predicted epidemic for different values of <span class="math inline">\(\mu\)</span>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="SIR_demography_files/figure-html/SIR_mus-1.png" class="img-fluid" width="1440"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SIR_demography_files/figure-html/SIR_mus-1.png" class="img-fluid figure-img" width="1440"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>When <span class="math inline">\(\mu\)</span> is low in value, the infection spreads through the population so quickly that few births and deaths have occurred in that time-scale.</p>
@@ -600,7 +608,7 @@ Solution
 <li><p>There are three parameters, the transmission route <span class="math inline">\(\beta\)</span>, the recovery rate <span class="math inline">\(\gamma\)</span> and the birth/death rate <span class="math inline">\(\mu\)</span>.</p></li>
 <li></li>
 </ol>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">beta =</span> <span class="fl">0.5</span>, <span class="at">gamma =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">20</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> pars[[<span class="st">"beta"</span>]]</span>

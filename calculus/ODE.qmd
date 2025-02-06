@@ -4,7 +4,7 @@ title: "Ordinary differential equations"
 
 ```{r setupo, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.width = 5,
-                      fig.height = 5)
+                      fig.height = 5, fig.align = "center")
 ```
 
 Ordinary differential equations can be used to model the rate of change of one variable with respect to another. They are often used in epidemic and ecological modelling as it allows us to specify the processes which affect the rate of change of populations.

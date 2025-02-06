@@ -2,6 +2,10 @@
 title: "BONUS : Stochastic models"
 ---
 
+```{r setupstoch, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
+```
+
 In the previous examples, the models have been deterministic, for a set of assumptions and parameter values, there is no variation in outcome. For stochastic models, For a set of assumptions and parameter values, the outcome can be different. This can arise from stochasticity in parameter values or in chance of events happening.
 
 Here we will learn how to code a simple stochastic model in R. Namely, a stochastic discrete time Susceptible - Infected model. 
@@ -62,35 +66,35 @@ These steps within the loop are repeated until the day counter is equal to `n_da
 ```{r fun, echo = TRUE}
 SI_model <- function(pars, initial_state, n_days) {
 
-  # assign numbers in each state on day 0
+  # Assign numbers in each state on day 0
   S_t <- initial_state["S0"]
   I_t <- initial_state["I0"]
 
-  # total pop size
+  # Total pop size
   N <- S_t + I_t
 
-  # set up data frame to store results
+  # Set up data frame to store results
   results <- data.frame(time = 0, S = S_t, I = I_t)
 
-  # set the day counter = 1
+  # Set the day counter = 1
   day <- 1
 
   while (day <= n_days) {
 
-    # probability of infection
+    # Probability of infection
     p_t <- 1 - exp(-pars["beta"] * I_t / N)
 
-    # how many infections
+    # How many infections
     B_t <- rbinom(1, S_t, p_t)
 
-    # update the number of susceptible and infected individuals
+    # Update the number of susceptible and infected individuals
     S_t <- results$S[day] - B_t
     I_t <- results$I[day] + B_t
 
-    # store results
+    # Store results
     results <- rbind(results, c(day, S_t, I_t))
 
-    # increase day
+    # Increase day
     day <- day + 1
   }
 
@@ -125,13 +129,13 @@ pars <- c(beta = 0.6)
 initial_state <- c(S0 = 99, I0 = 1)
 n_days <- 30
 
-# create an empty plot
+# Create an empty plot
 plot(NA, xlim = c(0, n_days), ylim = c(0, 100), ylab = "Number", xlab = "Time")
 legend(18, 60, c("Susceptible", "Infected"),
        col = c("darkblue", "darkred"),
        lwd = 2, lty = c(1, 2), bty = "n")
 
-# repeat the for loop n_sim = 10 times
+# Repeat the for loop n_sim = 10 times
 n_sims <- 10
 for (i in 1:n_sims) {
   output <- SI_model(pars, initial_state, n_days)

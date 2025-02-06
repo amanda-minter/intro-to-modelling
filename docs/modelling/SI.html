@@ -350,7 +350,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="the-susceptible---infected-model">The Susceptible - Infected model</h2>
 <p>The first model we will introduce is the Susceptible – Infected or SI model. In this model, individuals are in one of two disease states, susceptible or infected (and infectious). We refer to these disease states as different ‘compartments’.</p>
 <p>The schematic below represents our model in the form of a flow diagram. There are two compartments: ‘S’ for susceptible and ‘I’ for infected, and there is one process whereby individuals can move from ‘S’ to ‘I’, infection:</p>
-<p><img src="SI_words.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SI_words.png" class="img-fluid figure-img" style="width:60.0%"></p>
+</figure>
+</div>
 <p>To predict the flow between the two compartments, we will use ordinary differential equations (ODEs). Here we are interested in modelling the rate of change of the number of individuals in each compartment with respect to time.</p>
 <p>We will write an ODE for each compartment. Therefore we will have two equations. We have one process whereby individuals leave the ‘S’ class and those same individuals are added to the ‘I’ class:</p>
 <p><span class="math display">\[
@@ -388,16 +392,24 @@ ul.task-list li input[type="checkbox"] {
 <section id="the-si-model-continued" class="level2">
 <h2 class="anchored" data-anchor-id="the-si-model-continued">The SI model continued</h2>
 <p>The plot below shows the predicted numbers over time. We see that the number of infected individuals increases over time. As the outbreak progresses, more susceptible individuals become infected.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="SI_files/figure-html/SI-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SI_files/figure-html/SI-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Eventually all individuals become infected. This is because in our system of ODEs there is only one process and only one direction to that process : susceptible individuals becoming infected.</p>
 <p>One behaviour we can predict using the equation, is the speed at which the infection spreads. To explore this, we can look at the predicted numbers for different transmission rates <span class="math inline">\(\beta = 0.4\)</span>, <span class="math inline">\(\beta = 0.1\)</span> and <span class="math inline">\(\beta = 1.5\)</span>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="SI_files/figure-html/SI loop-1.png" class="img-fluid" width="768"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SI_files/figure-html/SI loop-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The higher the value of <span class="math inline">\(\beta\)</span> the quicker the infection spreads. In the next lesson, we will look at extending our model to include the possibility of recovering from infection.</p>

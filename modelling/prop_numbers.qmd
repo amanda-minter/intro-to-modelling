@@ -2,7 +2,7 @@
 title: "Modelling proportions or numbers"
 ---
 
-```{r setup, include=FALSE}
+```{r setupprop, include=FALSE}
 library(deSolve)
 ```
 
@@ -83,7 +83,7 @@ SIR_model_prop <- function(time, state_var, pars) {
   dS <- - beta * S * I
   dI <- beta * S * I - gamma * I
   dR <- gamma * I
-  # Return the derivatives as a list
+  # Return the equations as a list
   sol <- list(c(dS, dI, dR))
   return(sol)
 }
@@ -101,7 +101,7 @@ SIR_numbers_model <- function(time, state_var, pars) {
   dX <- -beta * X * Y / N
   dY <- beta * X * Y / N - gamma * Y
   dZ <- gamma * Y
-  # Return the derivatives as a list
+  # Return the equations as a list
   sol <- list(c(dX, dY, dZ))
   return(sol)
 }
